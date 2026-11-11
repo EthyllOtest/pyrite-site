@@ -111,6 +111,11 @@ export default config({
       siret: texte('SIRET'),
       formatAppel: texte("Format de l'appel initial", 'Visio ou téléphone'),
       calendly: fields.url({ label: 'Lien de la page Calendly', description: 'Par exemple https://calendly.com/votre-nom/appel-initial' }),
+      referencement: fields.checkbox({
+        label: 'Site visible par Google',
+        description: "À cocher le jour du lancement, une fois les contenus « À FOURNIR » remplis. Décoché, les moteurs de recherche sont priés de ne pas référencer le site.",
+        defaultValue: false,
+      }),
     }),
     mentions: pageLegale('Mentions légales', 'mentions-legales'),
     confidentialite: pageLegale('Politique de confidentialité', 'confidentialite'),

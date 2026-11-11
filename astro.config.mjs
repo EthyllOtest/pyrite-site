@@ -16,4 +16,7 @@ export default defineConfig({
   adapter: enDeveloppement ? undefined : cloudflare(),
   integrations: [react(), markdoc(), keystatic()],
   trailingSlash: 'never',
+  // Une page = un fichier « offres.html » (et non « offres/index.html ») : Cloudflare sert
+  // alors /offres directement, sans détour vers /offres/.
+  build: { format: 'file' },
 });

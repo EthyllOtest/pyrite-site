@@ -6,8 +6,11 @@ import '../styles/generated/composants.css';
 import '../styles/site.css';
 import EnTete from '../components/EnTete.astro';
 import PiedDePage from '../components/PiedDePage.astro';
+import { getEntry } from 'astro:content';
 interface Props { titre: string; description: string; boutonEnTete?: boolean }
 const { titre, description, boutonEnTete = true } = Astro.props;
+// Tant que la case « Site visible par Google » n'est pas cochée dans Keystatic, on demande aux moteurs de ne pas référencer.
+const visibleParGoogle = (await getEntry('pages', 'parametres'))?.data.referencement === true;
 const titreComplet = titre === 'Pyrite' ? "Pyrite · Tout ce qui brille n'est pas or" : `${titre} · Pyrite`;
 ---
 <!doctype html>
@@ -17,6 +20,7 @@ const titreComplet = titre === 'Pyrite' ? "Pyrite · Tout ce qui brille n'est pa
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{titreComplet}</title>
     <meta name="description" content={description} />
+    {!visibleParGoogle && <meta name="robots" content="noindex, nofollow" />}
     <meta name="theme-color" content="#e7e1d3" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:title" content={titreComplet} />
