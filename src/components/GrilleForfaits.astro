@@ -1,0 +1,11 @@
+---
+// Les offres en 2 × 2 (une colonne sous 640 px), puis la bande pleine largeur « Sur devis ».
+import CarteForfait, { type Forfait } from './CarteForfait.astro';
+interface Props { forfaits: Forfait[]; surDevis?: Forfait; lienBase?: string }
+const { forfaits, surDevis, lienBase = '/offres' } = Astro.props;
+const lien = (f: Forfait) => (f.ancre ? `${lienBase}#${f.ancre}` : undefined);
+---
+<div class="pyr-forfaits">
+  {forfaits.map((f) => <CarteForfait {...f} lien={lien(f)} />)}
+  {surDevis && <CarteForfait {...surDevis} ligne lien={lien(surDevis)} />}
+</div>

@@ -1,0 +1,35 @@
+forfaits:
+  - reference: PYR-00
+    nom: Appel initial
+    prix: 29 €
+    duree: 30 min
+    resume: Comprendre votre situation et vous recommander une offre.
+    ancre: appel-initial
+    sombre: false
+  - reference: PYR-01
+    nom: Premiers pas
+    prix: 119 €
+    duree: 60 min
+    resume: Pour démarrer avec l'IA sur vos propres tâches.
+    ancre: premiers-pas
+    sombre: false
+  - reference: PYR-02
+    nom: Essentiel
+    prix: 349 €
+    duree: 2 séances · 60 + 45 min
+    resume: Des instructions optimisées pour 2 à 3 de vos tâches, et Pyra.
+    ancre: essentiel
+    sombre: false
+  - reference: PYR-03
+    nom: Ultra
+    prix: 749 €
+    duree: 2 séances · 60 + 60 min
+    resume: Athanor, construit sur mesure pour votre métier.
+    ancre: ultra
+    sombre: true
+surDevis:
+  reference: PYR-MIS
+  nom: Missions
+  prix: Sur devis
+  resume: "Un besoin hors de ces formules : on le cadre pendant l'appel initial."
+  ancre: sur-devis

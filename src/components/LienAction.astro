@@ -1,0 +1,6 @@
+---
+// Lien d'action : IBM Plex Mono capitales, souligné ; la flèche est ajoutée ici (ne pas l'écrire dans le libellé).
+interface Props { href: string; class?: string }
+const { href, class: classe } = Astro.props;
+---
+<a href={href} class:list={['pyr-lien', classe]}><slot /><span aria-hidden="true"> →</span></a>

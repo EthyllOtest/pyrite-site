@@ -1,0 +1,17 @@
+---
+// En-tête « fiche de spécimen » : paires libellé / valeur en IBM Plex Mono.
+// Une valeur vide affiche un repère « À FOURNIR » avec la description donnée.
+import AFournir from './AFournir.astro';
+import { insecable, rempli } from '../lib/texte';
+interface Champ { libelle: string; valeur?: string | null; manque?: string }
+interface Props { champs: Champ[]; titre?: string }
+const { champs, titre } = Astro.props;
+---
+<dl class="pyr-specimen" aria-label={titre}>
+  {champs.map((c) => (
+    <Fragment>
+      <dt>{c.libelle}</dt>
+      <dd>{rempli(c.valeur) ? insecable(c.valeur) : <AFournir>{c.manque ?? c.libelle.toLowerCase()}</AFournir>}</dd>
+    </Fragment>
+  ))}
+</dl>

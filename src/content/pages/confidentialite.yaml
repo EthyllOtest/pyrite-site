@@ -1,0 +1,27 @@
+meta:
+  titre: Politique de confidentialité
+  description: Comment Pyrite traite vos données personnelles.
+titre: Politique de confidentialité
+miseAJour: ''
+sections:
+  - titre: Responsable du traitement
+    texte: ''
+    manque: identité et coordonnées du responsable du traitement
+  - titre: Données collectées
+    texte: ''
+    manque: données du formulaire de réservation (poste, secteur, usage de l'IA, tâches), coordonnées, paiement
+  - titre: Finalités et base légale
+    texte: ''
+    manque: pourquoi ces données sont collectées et sur quelle base
+  - titre: Sous-traitants
+    texte: ''
+    manque: Calendly, Stripe, Cloudflare, outil de mesure d'audience éventuel
+  - titre: Durée de conservation
+    texte: ''
+    manque: durée de conservation de chaque type de données
+  - titre: Vos droits
+    texte: ''
+    manque: accès, rectification, suppression, opposition, réclamation auprès de la CNIL, et comment les exercer
+  - titre: Cookies
+    texte: ''
+    manque: cookies déposés (le calendrier Calendly n'est chargé qu'à votre demande)

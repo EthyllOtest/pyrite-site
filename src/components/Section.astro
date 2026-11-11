@@ -1,0 +1,9 @@
+---
+// Section de page : fond clair (par défaut), relevé (un cran plus clair) ou sombre (moments forts).
+// Le thème sombre bascule toutes les couleurs d'usage, comme data-theme="sombre" dans le design system.
+interface Props { fond?: 'clair' | 'releve' | 'sombre'; id?: string; titreId?: string; class?: string }
+const { fond = 'clair', id, titreId, class: classe } = Astro.props;
+---
+<section id={id} aria-labelledby={titreId} class:list={['section', fond === 'releve' && 'section--releve', classe]} data-theme={fond === 'sombre' ? 'sombre' : undefined}>
+  <div class="conteneur"><slot /></div>
+</section>

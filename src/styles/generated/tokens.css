@@ -1,0 +1,88 @@
+/* Fichier généré par scripts/sync-design-system.mjs à partir de project/. Ne pas modifier à la main. */
+
+:root {
+  --fond-sombre: #1c150e;
+  --laiton: #c99a54;
+  --reflet: #e4c077;
+  --ombre: #8a6432;
+  --fond-clair: #e7e1d3;
+  --encre: #1c1812;
+  --papier: #ece5d6;
+  --bordure-claire: #d5ccb8;
+  --bordure-sombre: #332d22;
+  --brun-label: #7a5629;
+  --noir: #000000;
+  --blanc: #ffffff;
+  --accent: var(--laiton);
+  --or: var(--laiton);
+  --espace-4: 4px;
+  --espace-8: 8px;
+  --espace-16: 16px;
+  --espace-24: 24px;
+  --espace-32: 32px;
+  --espace-48: 48px;
+  --espace-64: 64px;
+  --espace-96: 96px;
+  --rayon: 0;
+  --trait-filet: 1px;
+  --trait-diviseur: 1.25px;
+  --trait-focus: 2px;
+  --font-display: "Fraunces Variable", Fraunces, Marcellus, Georgia, serif;
+  --font-texte: "Public Sans Variable", "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+}
+
+/* Thème clair : par défaut, et sur tout conteneur data-theme="clair". */
+:root,
+[data-theme="clair"] {
+  --fond: var(--fond-clair);
+  --fond-releve: #f3eee3;
+  --texte: var(--encre);
+  --texte-titre: var(--encre);
+  --texte-attenue: #5c5244;
+  --texte-label: var(--brun-label);
+  --texte-desactive: #9a9080;
+  --filet: var(--bordure-claire);
+  --bordure-champ: #857b66;
+  --sur-accent: var(--encre);
+  --lien: var(--encre);
+  --focus: var(--encre);
+  --erreur: #9a3a24;
+  --erreur-fond: #f2e0d8;
+  --succes: #2d5b50;
+  --succes-fond: #dde8e2;
+  --info: #3b5070;
+  --info-fond: #dfe4ec;
+  --pyrite: #5e5b45;
+  --pyrite-teinte: #dcd8c6;
+  --graphe-1: var(--ombre);
+  --graphe-2: #3a3024;
+  --graphe-3: var(--laiton);
+}
+
+/* Thème sombre : moments forts (appel final, Ultra), sur un conteneur data-theme="sombre". */
+[data-theme="sombre"] {
+  --fond: var(--fond-sombre);
+  --fond-releve: #272016;
+  --texte: var(--papier);
+  --texte-titre: var(--reflet);
+  --texte-attenue: #ada290;
+  --texte-label: var(--laiton);
+  --texte-desactive: #6e6550;
+  --filet: var(--bordure-sombre);
+  --bordure-champ: #7d735c;
+  --sur-accent: var(--fond-sombre);
+  --lien: var(--reflet);
+  --focus: var(--reflet);
+  --erreur: #e59a82;
+  --erreur-fond: #3a1f17;
+  --succes: #8ec3b2;
+  --succes-fond: #1b2b26;
+  --info: #9db4d6;
+  --info-fond: #1d2430;
+  --pyrite: #b4af8e;
+  --pyrite-teinte: #3a3829;
+  --graphe-1: var(--laiton);
+  --graphe-2: var(--papier);
+  --graphe-3: var(--ombre);
+}

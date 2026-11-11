@@ -1,0 +1,70 @@
+---
+// Page Réserver : ce qui se passe pendant l'appel initial, puis le calendrier Calendly (chargé au clic).
+// L'en-tête n'a pas de bouton : l'action de la page est le calendrier.
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Diviseur from '../components/Diviseur.astro';
+import FicheSpecimen from '../components/FicheSpecimen.astro';
+import Texte from '../components/Texte.astro';
+import LienAction from '../components/LienAction.astro';
+import Calendrier from '../components/Calendrier.astro';
+import Faq from '../components/Faq.astro';
+
+const r = (await getEntry('pages', 'reserver'))!.data;
+const o = (await getEntry('pages', 'offres'))!.data;
+const p = (await getEntry('pages', 'parametres'))!.data;
+const appel = o.forfaits.find((f: any) => f.reference === 'PYR-00');
+---
+<Base titre={r.meta.titre} description={r.meta.description} boutonEnTete={false}>
+  <Section titreId="titre-reserver">
+    <div class="ouverture">
+      <div class="pile">
+        <p class="pyr-label">{r.intro.label}</p>
+        <h1 id="titre-reserver" class="t-titre-1">{r.intro.titre}</h1>
+        <Diviseur class="diviseur-court" />
+        <p class="mesure">{r.intro.texte}</p>
+        <p class="t-annexe">{r.intro.suite}</p>
+      </div>
+      <FicheSpecimen titre="Fiche de l'appel initial" champs={[
+        { libelle: 'Référence', valeur: appel?.reference },
+        { libelle: 'Durée', valeur: '30 minutes' },
+        { libelle: 'Prix', valeur: appel?.prix },
+        { libelle: 'Format', valeur: p.formatAppel, manque: 'visio ou téléphone' },
+      ]} />
+    </div>
+  </Section>
+
+  <Section fond="releve" titreId="titre-deroule">
+    <div class="pile pile-48">
+      <h2 id="titre-deroule" class="t-titre-2">{r.deroule.titre}</h2>
+      <ol class="grille grille-4" role="list" style="list-style: none; padding: 0;">
+        {r.deroule.etapes.map((e: any, i: number) => (
+          <li class="pile pile-8"><span class="t-chiffre" aria-hidden="true">{i + 1}</span><h3 class="t-titre-3">{e.titre}</h3><p>{e.texte}</p></li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <Section titreId="titre-avant">
+    <div class="pile pile-16">
+      <h2 id="titre-avant" class="t-titre-2">{r.avant.titre}</h2>
+      <p class="mesure">{r.avant.texte}</p>
+      <Texte valeur={r.avant.formulaire} manque="formulaire à 3 ou 5 questions (options A ou B du document des offres)" />
+    </div>
+  </Section>
+
+  <Section fond="releve" id="calendrier" titreId="titre-creneau">
+    <div class="pile pile-24">
+      <h2 id="titre-creneau" class="t-titre-2">{r.reservation.titre}</h2>
+      <Calendrier url={p.calendly} />
+      <p class="t-annexe mesure">{r.reservation.mentions}</p>
+      <div class="rangee">
+        <LienAction href="/cgv">Lire les CGV</LienAction>
+        <LienAction href="/confidentialite">Politique de confidentialité</LienAction>
+      </div>
+    </div>
+  </Section>
+
+  <Faq questions={r.faq} />
+</Base>

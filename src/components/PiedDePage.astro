@@ -1,0 +1,47 @@
+---
+// Pied de page commun : marque, navigation, contact, pages légales obligatoires.
+import { getEntry } from 'astro:content';
+import AFournir from './AFournir.astro';
+import { rempli } from '../lib/texte';
+const p = (await getEntry('pages', 'parametres'))?.data ?? {};
+---
+<footer class="pied">
+  <div class="conteneur">
+    <div class="pied__colonnes">
+      <div class="pile pile-8">
+        <a href="/" class="wordmark" aria-label="Pyrite, accueil">PYRITE</a>
+        <p class="t-accroche" style="font-size: 16px">Tout ce qui brille n'est pas or.</p>
+      </div>
+      <div class="pile pile-8">
+        <h2 class="pyr-label">Le site</h2>
+        <ul class="pied__liste">
+          <li><a href="/offres">Offres</a></li>
+          <li><a href="/methode">Méthode</a></li>
+          <li><a href="/a-propos">À propos</a></li>
+          <li><a href="/reserver">Réserver l'appel initial</a></li>
+        </ul>
+      </div>
+      <div class="pile pile-8">
+        <h2 class="pyr-label">Contact</h2>
+        {rempli(p.email) || rempli(p.linkedin)
+          ? <ul class="pied__liste">
+              {rempli(p.email) && <li><a href={`mailto:${p.email}`}>{p.email}</a></li>}
+              {rempli(p.linkedin) && <li><a href={p.linkedin}>LinkedIn</a></li>}
+            </ul>
+          : <AFournir bloc>e-mail et lien LinkedIn</AFournir>}
+      </div>
+      <div class="pile pile-8">
+        <h2 class="pyr-label">Informations légales</h2>
+        <ul class="pied__liste">
+          <li><a href="/mentions-legales">Mentions légales</a></li>
+          <li><a href="/confidentialite">Politique de confidentialité</a></li>
+          <li><a href="/cgv">Conditions générales de vente</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pied__bas t-annexe">
+      <span>Pyrite · micro-entreprise ·</span>
+      {rempli(p.siret) ? <span>SIRET {p.siret}</span> : <AFournir>SIRET</AFournir>}
+    </div>
+  </div>
+</footer>

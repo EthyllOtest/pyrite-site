@@ -1,0 +1,58 @@
+meta:
+  titre: La méthode
+  description: "La grille or / pyrite et la méthode 4D : trier les tâches où l'IA vous aide vraiment de celles où elle n'est qu'un faux-semblant."
+intro:
+  label: La méthode
+  titre: Le discernement avant l'outil
+  texte: "Avant de demander quoi que ce soit à l'IA, on trie : les tâches où elle vous aide vraiment, et celles où elle n'est qu'un faux-semblant. Ce tri est au cœur de chaque accompagnement."
+pourquoi:
+  titre: Tout ce qui brille n'est pas or
+  texte: "Une IA générative prédit la suite la plus probable d'un texte, à partir de ce qu'on lui donne. Elle produit du plausible, pas forcément du vrai, et ne vérifie pas seule ce qu'elle écrit. Elle répond avec le même aplomb dans les deux cas : la différence, c'est votre capacité à vérifier."
+grille:
+  label: La grille or / pyrite
+  titre: Deux verdicts, quatre critères
+  texte: "Chaque tâche est examinée selon quatre critères, puis reçoit l'un des deux verdicts : or ou pyrite."
+  or:
+    titre: L'IA vous aide
+    texte: Vous pouvez vérifier le résultat, les données ne posent pas de problème et l'enjeu le permet. L'IA peut faciliter cette tâche.
+  pyrite:
+    titre: L'IA brille sans valeur
+    texte: Le résultat est invérifiable, les données sont sensibles ou l'enjeu est trop lourd. Mieux vaut garder cette tâche hors IA.
+  criteres:
+    - titre: La nature de la tâche
+      texte: "Ce que vous demandez à l'IA : rédiger, résumer, reformuler, chercher un fait. Toutes ces tâches ne s'y prêtent pas de la même façon."
+    - titre: La vérification
+      texte: Pouvez-vous contrôler le résultat vous-même, ou par une source fiable ?
+    - titre: Les données
+      texte: "Ce que vous confiez à l'outil : informations confidentielles, clients ou personnelles."
+    - titre: L'enjeu
+      texte: Ce que coûterait une erreur, pour vous ou pour d'autres.
+quatreD:
+  label: La méthode 4D
+  titre: Quatre étapes, toujours dans le même ordre
+  texte: Elles structurent chaque accompagnement, de la compréhension de votre métier à la remise des livrables.
+  etapes:
+    - nom: Déconstruire
+      texte: "Comprendre votre métier réel : vos tâches, vos documents, vos contraintes."
+    - nom: Diagnostiquer
+      texte: Choisir les bonnes tâches avec la grille or / pyrite.
+    - nom: Développer
+      texte: Construire les instructions et les outils adaptés à ces tâches.
+    - nom: Délivrer
+      texte: Vous remettre des livrables que vous gardez et savez utiliser.
+engagements:
+  titre: Ce que Pyrite ne fait pas
+  points:
+    - titre: Aucune promesse chiffrée
+      texte: Le temps gagné dépend de vos tâches. Il se mesure sur votre travail, pas sur une moyenne.
+    - titre: Pas de démonstration générale
+      texte: On part de vos tâches réelles, pas d'un catalogue de fonctions.
+    - titre: Pas de jargon
+      texte: "Un seul terme technique : le prompt, c'est-à-dire l'instruction que vous donnez à l'IA."
+donnees:
+  label: Confidentialité
+  titre: Vos données
+  texte: "Selon l'outil et l'offre souscrite, ce que vous écrivez peut servir à entraîner le modèle ; un réglage permet souvent de le désactiver. Avant d'y mettre des données professionnelles, on vérifie ensemble ce réglage et la règle de votre employeur."
+final:
+  titre: Appliquer la grille à vos tâches
+  texte: "Dès l'appel initial, vous repartez avec un premier repère sur la tâche la plus favorable."

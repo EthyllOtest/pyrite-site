@@ -1,0 +1,89 @@
+meta:
+  titre: Les offres
+  description: "Appel initial, Premiers pas, Essentiel, Ultra et missions sur devis : toutes les offres de Pyrite commencent par un appel de 30 minutes."
+intro:
+  label: Les offres
+  titre: Les offres
+  texte: "Toutes commencent par l'appel initial : 30 minutes pour comprendre votre situation, puis une recommandation. Vous n'avez pas à choisir seul."
+details:
+  - reference: PYR-00
+    blocs:
+      - titre: Pour qui
+        texte: "Toute personne qui envisage un accompagnement : c'est la porte d'entrée de toutes les offres."
+        manque: ''
+      - titre: Déroulé
+        texte: "À la réservation, un court formulaire : votre poste, votre usage actuel de l'IA, 2 ou 3 tâches qui vous prennent du temps. Pendant l'appel : votre situation, vos tâches et vos contraintes, puis les options avec mon conseil."
+        manque: ''
+      - titre: Ce que vous emportez
+        texte: Une recommandation argumentée, et un premier repère sur la tâche la plus favorable. Le devis suit dans l'heure.
+        manque: ''
+      - titre: Format
+        texte: ''
+        manque: visio ou téléphone
+  - reference: PYR-01
+    blocs:
+      - titre: Pour qui
+        texte: Si vous débutez avec l'IA.
+        manque: ''
+      - titre: Déroulé
+        texte: ''
+        manque: déroulé de Premiers pas en 60 minutes
+      - titre: Ce que vous emportez
+        texte: ''
+        manque: livrables de Premiers pas
+  - reference: PYR-02
+    blocs:
+      - titre: Pour qui
+        texte: Si vous voulez appliquer l'IA à vos propres tâches, avec des outils prêts à l'emploi.
+        manque: ''
+      - titre: Déroulé
+        texte: Deux séances, 60 puis 45 minutes, sur vos tâches réelles.
+        manque: ''
+      - titre: Contenu des séances
+        texte: ''
+        manque: contenu de chaque séance
+      - titre: Ce que vous emportez
+        texte: "2 à 3 instructions optimisées pour vos tâches, construites par Pyrite. Pyra, l'assistant qui vous aide à construire vos propres instructions (usage personnel, non cessible)."
+        manque: ''
+  - reference: PYR-03
+    blocs:
+      - titre: Pour qui
+        texte: Si vous voulez un outil construit pour votre métier, sans avoir à le concevoir vous-même.
+        manque: ''
+      - titre: Déroulé
+        texte: ''
+        manque: "déroulé des deux séances et délai de livraison d'Athanor"
+      - titre: Ce que vous emportez
+        texte: Athanor, construit sur mesure pour votre métier. 2 instructions construites en séance, la troisième envoyée ensuite.
+        manque: ''
+      - titre: Après la livraison
+        texte: ''
+        manque: disponibilité en cas de question (pas de suivi programmé)
+  - reference: PYR-MIS
+    blocs:
+      - titre: Pour qui
+        texte: Un besoin hors de ces formules.
+        manque: ''
+      - titre: Déroulé
+        texte: "On le cadre pendant l'appel initial, puis je vous envoie un devis."
+        manque: ''
+      - titre: Exemples
+        texte: ''
+        manque: "exemples de missions sur devis et à qui elles s'adressent"
+employeur:
+  label: Financement
+  titre: Si votre employeur finance
+  texte: "L'accompagnement peut être facturé à votre entreprise. Dites-le pendant l'appel initial : le devis est alors établi à son nom."
+  conditions: ''
+faq:
+  - question: Dois-je déjà utiliser l'IA ?
+    reponse: Non. Premiers pas est fait pour démarrer, et l'appel initial sert à situer votre niveau.
+  - question: Quels outils d'IA utilise-t-on ?
+    reponse: "Celui que vous utilisez déjà ou que votre employeur autorise : ChatGPT, Claude, Gemini ou Copilot. Il n'y a pas de meilleur outil dans l'absolu."
+  - question: Que devient ce que je montre pendant les séances ?
+    reponse: ''
+  - question: Peut-on passer d'une offre à l'autre ?
+    reponse: ''
+final:
+  titre: "Le plus simple : en parler 30 minutes"
+  texte: Vous décrivez votre situation ; je vous recommande l'offre qui vous correspond.

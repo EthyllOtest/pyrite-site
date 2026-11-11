@@ -1,0 +1,40 @@
+---
+// Calendrier Calendly chargé seulement à la demande du visiteur : aucun cookie Calendly
+// n'est déposé avant le clic, ce qui évite un bandeau de consentement.
+// Lien Calendly : champ « Lien de la page Calendly » dans Keystatic (Coordonnées et informations).
+import Bouton from './Bouton.astro';
+import AFournir from './AFournir.astro';
+interface Props { url?: string | null }
+const { url } = Astro.props;
+const src = url ? `${url}${url.includes('?') ? '&' : '?'}hide_gdpr_banner=1&background_color=f3eee3&text_color=1c1812&primary_color=c99a54` : null;
+---
+<div class="calendrier" data-calendrier data-src={src}>
+  {src
+    ? <div class="pile pile-16 pile-centre">
+        <p class="pyr-label">Calendrier de réservation</p>
+        <p class="mesure">Le calendrier est fourni par Calendly. En l'affichant, vous acceptez que Calendly dépose des cookies nécessaires à la réservation.</p>
+        <Bouton data-ouvrir-calendrier class="pleine-largeur-mobile">Afficher le calendrier</Bouton>
+        <a class="t-annexe" href={url} target="_blank" rel="noopener">Ou ouvrir Calendly dans un nouvel onglet</a>
+      </div>
+    : <div class="pile pile-16 pile-centre">
+        <p class="pyr-label">Calendrier de réservation</p>
+        <p class="mesure">Choix du créneau, formulaire préalable, paiement de 29 €.</p>
+        <AFournir>lien de la page Calendly (offre Standard, avec paiement Stripe), à saisir dans Keystatic</AFournir>
+      </div>}
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-calendrier]').forEach((bloc) => {
+    const bouton = bloc.querySelector('[data-ouvrir-calendrier]');
+    const src = bloc.dataset.src;
+    if (!bouton || !src) return;
+    bouton.addEventListener('click', () => {
+      const cadre = document.createElement('iframe');
+      cadre.src = src;
+      cadre.title = "Calendrier de réservation de l'appel initial (Calendly)";
+      cadre.loading = 'lazy';
+      bloc.replaceChildren(cadre);
+      bloc.classList.add('est-charge');
+      cadre.focus();
+    });
+  });
+</script>

@@ -1,0 +1,33 @@
+---
+// Gabarit commun à toutes les pages : polices, design system, en-tête, pied de page.
+import '../styles/polices.css';
+import '../styles/generated/tokens.css';
+import '../styles/generated/composants.css';
+import '../styles/site.css';
+import EnTete from '../components/EnTete.astro';
+import PiedDePage from '../components/PiedDePage.astro';
+interface Props { titre: string; description: string; boutonEnTete?: boolean }
+const { titre, description, boutonEnTete = true } = Astro.props;
+const titreComplet = titre === 'Pyrite' ? "Pyrite · Tout ce qui brille n'est pas or" : `${titre} · Pyrite`;
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titreComplet}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#e7e1d3" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={titreComplet} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+  </head>
+  <body>
+    <a class="evitement" href="#contenu">Aller au contenu</a>
+    <EnTete avecBouton={boutonEnTete} />
+    <main id="contenu"><slot /></main>
+    <PiedDePage />
+  </body>
+</html>

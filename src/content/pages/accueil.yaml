@@ -1,0 +1,52 @@
+meta:
+  titre: Pyrite
+  description: "Accompagnement individuel en IA générative pour cadres et indépendants : repérer les tâches où l'IA vous aide vraiment, et celles où elle n'est qu'un faux-semblant."
+ouverture:
+  label: Accompagnement IA · cadres et indépendants
+  titre: Utiliser l'IA là où elle vous aide vraiment.
+  texte: "Un accompagnement individuel pour repérer, dans votre travail, les tâches où l'IA vous aide vraiment et celles où elle n'est qu'un faux-semblant. Sur vos tâches réelles, sans jargon."
+  mention: 30 minutes · 29 €
+constat:
+  titre: L'IA répond avec le même aplomb, qu'elle ait raison ou non.
+  texte: "Les outils d'IA sont faciles à ouvrir et difficiles à bien utiliser. Ce qui manque, ce n'est pas un outil de plus : c'est de savoir où leur faire confiance."
+  points:
+    - titre: Du plausible, pas forcément du vrai
+      texte: L'IA prédit la suite la plus probable d'un texte. Elle ne vérifie pas seule ce qu'elle écrit.
+    - titre: Des données confiées sans y penser
+      texte: Des documents professionnels collés dans un outil, sans savoir ce qu'il en fait ni ce que votre employeur autorise.
+    - titre: Des essais, puis l'abandon
+      texte: Des résultats décevants, faute de savoir quoi demander et comment le demander.
+methode:
+  label: La méthode
+  titre: "Or ou pyrite : trier avant d'utiliser"
+  texte: Chaque tâche reçoit un verdict. La pyrite ressemble à l'or sans en avoir la valeur ; certaines réponses de l'IA aussi.
+  or:
+    titre: L'IA vous aide
+    texte: Vous pouvez vérifier le résultat, les données ne posent pas de problème et l'enjeu le permet. L'IA peut faciliter cette tâche.
+  pyrite:
+    titre: L'IA brille sans valeur
+    texte: Le résultat est invérifiable, les données sont sensibles ou l'enjeu est trop lourd. Mieux vaut garder cette tâche hors IA.
+  criteres: "Quatre critères pour trancher : la nature de la tâche, la vérification, les données, l'enjeu."
+deroule:
+  titre: Comment ça se passe
+  etapes:
+    - titre: Appel initial
+      texte: 30 minutes, 29 €. Vous décrivez votre situation et vos tâches ; je repère où l'IA peut vous aider.
+    - titre: Recommandation
+      texte: À la fin de l'appel, je vous présente les options et vous conseille celle qui vous correspond. Le devis suit dans l'heure.
+    - titre: Accompagnement
+      texte: "Des séances sur vos tâches réelles, et des livrables que vous gardez : des instructions prêtes à l'emploi pour l'IA, puis Pyra ou Athanor selon l'offre."
+offres:
+  titre: Les offres
+  texte: "Vous n'avez pas à choisir seul : l'appel initial sert à vous recommander l'offre qui vous correspond."
+accompagnement:
+  label: Qui vous accompagne
+  titre: Ewan, fondateur de Pyrite
+  portrait: null
+  portraitAlt: ''
+  parcours: ''
+  realisation: ''
+retours: []
+final:
+  titre: Commencer par 30 minutes
+  texte: Vous décrivez votre situation ; je vous dis où l'IA peut vous aider et quelle offre vous correspond.

@@ -1,0 +1,6 @@
+---
+// Étiquette de verdict : OR en surface pleine, PYRITE en contour pointillé (lisible sans couleur).
+interface Props { type: 'or' | 'pyrite' }
+const { type } = Astro.props;
+---
+<span class:list={['pyr-verdict', `pyr-verdict-${type}`]}>{type === 'or' ? 'Or' : 'Pyrite'}</span>

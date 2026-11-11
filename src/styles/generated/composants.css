@@ -1,0 +1,149 @@
+/* Fichier généré par scripts/sync-design-system.mjs à partir de project/. Ne pas modifier à la main. */
+/* Pyrite rév. 02 — composants. Toutes les valeurs viennent de tokens.css. Rayon 0 partout, aucune ombre portée. */
+
+.pyr-apercu { display: flex; flex-wrap: wrap; gap: var(--espace-16); align-items: flex-start; padding: var(--espace-24); }
+.pyr-apercu-col { display: flex; flex-direction: column; gap: var(--espace-24); padding: var(--espace-24); }
+.pyr-legende { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--texte-label); margin: 0 0 var(--espace-8); }
+
+/* Label commun */
+.pyr-label, .pyr-ref { font-family: var(--font-mono); font-size: 11px; line-height: 1.4; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--texte-label); }
+
+/* Bouton */
+.pyr-btn { font-family: var(--font-texte); font-size: 16px; font-weight: 500; line-height: 1.2; padding: 12px var(--espace-24); border-radius: var(--rayon); border: var(--trait-filet) solid var(--ombre); cursor: pointer; white-space: nowrap; }
+.pyr-btn-principal { background: var(--accent); color: var(--sur-accent); }
+.pyr-btn-principal:hover { background: var(--reflet); }
+.pyr-btn-secondaire { background: transparent; color: var(--texte); border-color: var(--texte); }
+.pyr-btn-secondaire:hover { background: var(--fond-releve); }
+.pyr-btn:focus-visible, .pyr-btn.is-focus { outline: var(--trait-focus) solid var(--focus); outline-offset: 2px; }
+.pyr-btn:disabled { background: transparent; color: var(--texte-desactive); border-color: var(--texte-desactive); cursor: not-allowed; }
+
+/* Lien d'action */
+.pyr-lien { font-family: var(--font-mono); font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--lien); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.pyr-lien:hover { text-decoration-thickness: 2px; }
+.pyr-lien:focus-visible, .pyr-lien.is-focus { outline: var(--trait-focus) solid var(--focus); outline-offset: 3px; }
+
+/* Champ de saisie */
+.pyr-champ { display: flex; flex-direction: column; gap: var(--espace-4); max-width: 420px; width: 100%; }
+.pyr-champ-ctrl { font-family: var(--font-texte); font-size: 16px; font-weight: 350; line-height: 1.5; color: var(--texte); background: var(--fond-releve); border: var(--trait-filet) solid var(--bordure-champ); border-radius: var(--rayon); padding: 10px var(--espace-16); width: 100%; box-sizing: border-box; resize: vertical; }
+.pyr-champ-ctrl::placeholder { color: var(--texte-attenue); }
+.pyr-champ-ctrl:focus-visible, .pyr-champ-ctrl.is-focus { outline: var(--trait-focus) solid var(--focus); outline-offset: 2px; border-color: var(--texte); }
+.pyr-champ-ctrl.is-erreur { border-color: var(--erreur); border-width: 2px; padding: 9px 15px; }
+.pyr-champ-ctrl:disabled { color: var(--texte-desactive); border-color: var(--texte-desactive); background: transparent; }
+.pyr-champ.is-desactive .pyr-label { color: var(--texte-desactive); }
+.pyr-champ-msg { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--texte-attenue); }
+.pyr-champ-erreur { color: var(--erreur); }
+.pyr-etat-mot { font-weight: 600; }
+
+/* Message d'état */
+.pyr-msg { display: flex; flex-direction: column; gap: var(--espace-4); padding: 12px var(--espace-16); border: var(--trait-filet) solid; border-radius: var(--rayon); max-width: 520px; }
+.pyr-msg-mot { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; }
+.pyr-msg-texte { margin: 0; font-size: 15px; line-height: 1.5; color: var(--texte); }
+.pyr-msg-erreur { background: var(--erreur-fond); border-color: var(--erreur); }
+.pyr-msg-erreur .pyr-msg-mot { color: var(--erreur); }
+.pyr-msg-succes { background: var(--succes-fond); border-color: var(--succes); }
+.pyr-msg-succes .pyr-msg-mot { color: var(--succes); }
+.pyr-msg-info { background: var(--info-fond); border-color: var(--info); }
+.pyr-msg-info .pyr-msg-mot { color: var(--info); }
+
+/* Carte de forfait */
+.pyr-forfaits { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--espace-16); max-width: 760px; }
+.pyr-forfaits > .pyr-forfait-ligne { grid-column: 1 / -1; }
+.pyr-forfait { display: flex; flex-direction: column; gap: var(--espace-8); padding: var(--espace-24); background: var(--fond-releve); border: var(--trait-filet) solid var(--filet); border-radius: var(--rayon); min-width: 0; }
+.pyr-forfait-tete { display: flex; justify-content: space-between; align-items: baseline; gap: var(--espace-16); }
+.pyr-prix { font-family: var(--font-mono); font-size: 15px; font-weight: 500; letter-spacing: .02em; white-space: nowrap; color: var(--texte); font-variant-numeric: tabular-nums; }
+.pyr-forfait-nom { margin: var(--espace-8) 0 0; font-family: var(--font-display); font-weight: 400; font-size: 26px; line-height: 1.1; color: var(--texte-titre); overflow-wrap: anywhere; hyphens: auto; }
+.pyr-forfait-duree { margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--texte-attenue); }
+.pyr-forfait-desc { margin: 0; font-size: 15px; line-height: 1.55; color: var(--texte); }
+.pyr-forfait-sombre { background: var(--fond-sombre); border-color: var(--laiton); }
+.pyr-forfait-sombre .pyr-ref, .pyr-forfait-sombre .pyr-forfait-duree { color: var(--laiton); }
+.pyr-forfait-sombre .pyr-prix, .pyr-forfait-sombre .pyr-forfait-desc { color: var(--papier); }
+.pyr-forfait-sombre .pyr-forfait-nom { color: var(--reflet); }
+.pyr-forfait-ligne { flex-direction: row; flex-wrap: wrap; align-items: baseline; column-gap: var(--espace-24); }
+.pyr-forfait-ligne .pyr-forfait-tete { flex-direction: column; gap: 0; }
+.pyr-forfait-ligne .pyr-forfait-nom { margin: 0; font-size: 22px; }
+.pyr-forfait-ligne .pyr-forfait-desc { flex: 1 1 260px; }
+.pyr-a-confirmer { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--texte-attenue); white-space: nowrap; }
+.pyr-forfait-sombre .pyr-a-confirmer { color: var(--laiton); }
+
+/* Tableau de données */
+.pyr-tableau-wrap { overflow-x: auto; max-width: 100%; }
+.pyr-tableau { border-collapse: collapse; font-size: 15px; line-height: 1.45; color: var(--texte); min-width: 420px; }
+.pyr-tableau caption { text-align: left; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--texte-label); padding-bottom: var(--espace-8); }
+.pyr-tableau thead th { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--texte-label); text-align: left; padding: var(--espace-8) var(--espace-16); border-bottom: var(--trait-filet) solid var(--ombre); }
+.pyr-tableau tbody th, .pyr-tableau td { text-align: left; font-weight: 350; padding: 10px var(--espace-16); border-bottom: var(--trait-filet) solid var(--filet); vertical-align: top; }
+.pyr-tableau tbody th { font-weight: 500; }
+.pyr-tableau .is-num { text-align: right; font-family: var(--font-mono); font-size: 14px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Wordmark et monogramme */
+.pyr-wm { display: inline-flex; flex-direction: column; align-items: center; gap: .35em; padding: .7em; font-size: 40px; }
+.pyr-wm-nom { font-family: var(--font-display); font-weight: 300; font-size: 1em; line-height: 1; letter-spacing: .2em; margin-right: -.2em; font-variation-settings: "opsz" 144; }
+.pyr-wm-accroche { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: .32em; line-height: 1.2; letter-spacing: 0; }
+.pyr-wm-principale { background: var(--fond-sombre); color: var(--reflet); }
+.pyr-wm-principale .pyr-wm-accroche { color: var(--papier); }
+.pyr-wm-clair { background: var(--fond-clair); color: var(--encre); }
+.pyr-wm-positive { background: var(--blanc); color: var(--noir); }
+.pyr-wm-negative { background: var(--noir); color: var(--blanc); }
+.pyr-wm-nu { background: transparent; padding: 0; color: inherit; }
+.pyr-mono { display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; border-radius: var(--rayon); font-family: var(--font-display); font-weight: 400; line-height: 1; font-variation-settings: "opsz" 72; }
+.pyr-mono-principale { background: var(--fond-sombre); color: var(--reflet); }
+.pyr-mono-positive { background: var(--blanc); color: var(--noir); outline: var(--trait-filet) solid var(--noir); outline-offset: -1px; }
+.pyr-mono-negative { background: var(--noir); color: var(--blanc); }
+
+/* Diviseur à facettes — seul motif du système */
+.pyr-diviseur { display: block; width: 100%; height: 10px; overflow: visible; }
+.pyr-diviseur path { fill: none; stroke: var(--laiton); stroke-width: var(--trait-diviseur); stroke-linejoin: miter; stroke-linecap: square; }
+.pyr-diviseur-noir path { stroke: var(--noir); }
+.pyr-diviseur-reflet path { stroke: var(--reflet); }
+
+/* En-tête fiche de spécimen */
+.pyr-specimen { display: grid; grid-template-columns: max-content minmax(0, 1fr); column-gap: var(--espace-24); margin: 0; padding: var(--espace-8) 0; border-top: var(--trait-filet) solid var(--ombre); border-bottom: var(--trait-filet) solid var(--ombre); font-family: var(--font-mono); font-size: 12px; line-height: 1.5; max-width: 520px; }
+.pyr-specimen dt { font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--texte-label); padding: 4px 0; }
+.pyr-specimen dd { margin: 0; color: var(--texte); padding: 4px 0; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.pyr-specimen dt:not(:first-of-type), .pyr-specimen dt:not(:first-of-type) + dd { border-top: var(--trait-filet) solid var(--filet); }
+
+/* Verdict Or / Pyrite — lisible sans couleur : plein contre contour pointillé */
+.pyr-verdict { display: inline-flex; align-items: center; justify-content: center; min-width: 88px; box-sizing: border-box; padding: 6px 14px; border-radius: var(--rayon); font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .2em; line-height: 1.2; text-transform: uppercase; }
+.pyr-verdict-or { background: var(--or); color: var(--sur-accent); border: var(--trait-filet) solid var(--or); }
+.pyr-verdict-pyrite { background: transparent; color: var(--pyrite); border: var(--trait-filet) dashed var(--pyrite); }
+.pyr-verdict-nb.pyr-verdict-or { background: var(--noir); color: var(--blanc); border-color: var(--noir); }
+.pyr-verdict-nb.pyr-verdict-pyrite { color: var(--noir); border-color: var(--noir); }
+
+/* Repère de la méthode 4D */
+.pyr-etape { display: inline-flex; align-items: baseline; gap: 10px; font-family: var(--font-mono); font-weight: 500; text-transform: uppercase; letter-spacing: .12em; color: var(--texte-attenue); }
+.pyr-etape-num { font-size: 13px; padding: 2px 6px; border: var(--trait-filet) solid currentColor; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+.pyr-etape-nom { font-size: 12px; }
+.pyr-etape.is-actif { color: var(--texte); }
+.pyr-etape.is-actif .pyr-etape-num { background: var(--accent); color: var(--sur-accent); border-color: var(--ombre); }
+
+/* Bloc « à copier » */
+.pyr-copier { border: var(--trait-filet) solid var(--texte); border-radius: var(--rayon); background: var(--fond-releve); max-width: 620px; }
+.pyr-copier-tete { display: flex; justify-content: space-between; align-items: center; gap: var(--espace-16); padding: var(--espace-8) var(--espace-16); border-bottom: var(--trait-filet) solid var(--filet); }
+.pyr-copier-texte { margin: 0; padding: var(--espace-16); font-family: var(--font-texte); font-size: 16px; font-weight: 400; line-height: 1.7; color: var(--texte); white-space: pre-wrap; }
+.pyr-zone { font-family: var(--font-mono); font-size: .82em; letter-spacing: .04em; padding: 1px 6px; border: var(--trait-filet) dashed var(--texte-label); color: var(--texte-label); white-space: nowrap; }
+.pyr-copier-nb { border-color: var(--noir); background: var(--blanc); color: var(--noir); }
+.pyr-copier-nb .pyr-copier-texte { color: var(--noir); }
+.pyr-copier-nb .pyr-zone { border-color: var(--noir); color: var(--noir); }
+.pyr-copier-nb .pyr-label { color: var(--noir); }
+
+/* Encadré « stop » */
+.pyr-stop { border: var(--trait-focus) solid var(--texte); border-radius: var(--rayon); padding: var(--espace-16) var(--espace-24) var(--espace-24); max-width: 620px; }
+.pyr-stop-tete { display: flex; align-items: center; gap: var(--espace-16); margin-bottom: var(--espace-8); }
+.pyr-stop-marque { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .2em; padding: 4px 10px; background: var(--texte); color: var(--fond); }
+.pyr-stop-titre { margin: 0; font-family: var(--font-display); font-size: 22px; font-weight: 500; line-height: 1.1; color: var(--texte-titre); }
+.pyr-stop ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--espace-8); }
+.pyr-stop li { display: flex; gap: 12px; font-size: 16px; line-height: 1.5; }
+.pyr-stop li::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: .6em; background: var(--ombre); }
+
+/* Comparatif d'offres */
+.pyr-comparatif { border-collapse: collapse; font-size: 15px; line-height: 1.45; color: var(--texte); min-width: 560px; }
+.pyr-comparatif th, .pyr-comparatif td { padding: 10px var(--espace-16); text-align: left; vertical-align: top; border-bottom: var(--trait-filet) solid var(--filet); }
+.pyr-comparatif thead th { vertical-align: bottom; border-bottom: var(--trait-filet) solid var(--ombre); font-weight: 400; }
+.pyr-comparatif tbody th { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--texte-label); }
+.pyr-comp-nom { display: block; font-family: var(--font-display); font-size: 22px; line-height: 1.1; color: var(--texte-titre); margin-top: 4px; }
+.pyr-comp-reco { display: inline-block; margin-bottom: var(--espace-8); font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .14em; padding: 2px 6px; background: var(--texte); color: var(--fond); }
+.pyr-comparatif .is-sombre { background: var(--fond-sombre); color: var(--papier); border-bottom-color: var(--bordure-sombre); }
+.pyr-comparatif .is-sombre .pyr-ref { color: var(--laiton); }
+.pyr-comparatif .is-sombre .pyr-comp-nom { color: var(--reflet); }
+.pyr-comparatif .is-sombre .pyr-comp-reco { background: var(--laiton); color: var(--fond-sombre); }
+.pyr-comparatif .is-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pyr-comp-conclusion { margin: var(--espace-16) 0 0; max-width: 620px; font-size: 16px; }

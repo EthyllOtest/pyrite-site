@@ -1,0 +1,32 @@
+---
+// Page de confirmation : à indiquer dans Calendly comme page de redirection après réservation.
+import { getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+import FicheSpecimen from '../../components/FicheSpecimen.astro';
+import Texte from '../../components/Texte.astro';
+import LienAction from '../../components/LienAction.astro';
+
+const c = (await getEntry('pages', 'confirmation'))!.data;
+const p = (await getEntry('pages', 'parametres'))!.data;
+---
+<Base titre={c.meta.titre} description={c.meta.description} boutonEnTete={false}>
+  <Section titreId="titre-confirmation">
+    <div class="pile">
+      <div class="pyr-msg pyr-msg-succes" role="status">
+        <span class="pyr-msg-mot">Confirmé</span>
+        <p class="pyr-msg-texte">{c.message}</p>
+      </div>
+      <h1 id="titre-confirmation" class="t-titre-1">{c.titre}</h1>
+      <FicheSpecimen titre="Votre rendez-vous" champs={[
+        { libelle: 'Date', valeur: "Dans l'e-mail de confirmation" },
+        { libelle: 'Durée', valeur: '30 minutes' },
+        { libelle: 'Format', valeur: p.formatAppel, manque: 'visio ou téléphone' },
+      ]} />
+      <p class="mesure">Vous allez recevoir un e-mail de confirmation.</p>
+      <Texte valeur={c.email} manque="contenu de l'e-mail de confirmation (lien de connexion, rappel, facture)" />
+      <p class="mesure">{c.preparation}</p>
+      <LienAction href="/">Retour à l'accueil</LienAction>
+    </div>
+  </Section>
+</Base>

@@ -1,0 +1,160 @@
+---
+// Accueil (page pilote). Textes : src/content/pages/accueil.yaml, modifiables dans /keystatic.
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Bouton from '../components/Bouton.astro';
+import LienAction from '../components/LienAction.astro';
+import Diviseur from '../components/Diviseur.astro';
+import FicheSpecimen from '../components/FicheSpecimen.astro';
+import Verdict from '../components/Verdict.astro';
+import GrilleForfaits from '../components/GrilleForfaits.astro';
+import AFournir from '../components/AFournir.astro';
+import { rempli } from '../lib/texte';
+
+const a = (await getEntry('pages', 'accueil'))!.data;
+const o = (await getEntry('pages', 'offres'))!.data;
+const p = (await getEntry('pages', 'parametres'))!.data;
+const appel = o.forfaits.find((f: { reference: string }) => f.reference === 'PYR-00');
+const retours = (a.retours ?? []).filter((r: { citation?: string }) => rempli(r.citation));
+const afficherRetours = retours.length > 0 || import.meta.env.DEV;
+---
+<Base titre={a.meta.titre} description={a.meta.description}>
+  <Section titreId="titre-ouverture">
+    <div class="ouverture">
+      <div class="pile">
+        <p class="pyr-label">{a.ouverture.label}</p>
+        <h1 id="titre-ouverture" class="t-titre-1">{a.ouverture.titre}</h1>
+        <Diviseur class="diviseur-court" />
+        <p class="t-accroche">Tout ce qui brille n'est pas or.</p>
+        <p class="mesure">{a.ouverture.texte}</p>
+        <div class="rangee">
+          <Bouton href="/reserver" class="pleine-largeur-mobile">Réserver l'appel initial</Bouton>
+          <span class="t-annexe">{a.ouverture.mention}</span>
+        </div>
+      </div>
+      <FicheSpecimen titre="Fiche de la première étape" champs={[
+        { libelle: 'Référence', valeur: appel?.reference },
+        { libelle: 'Étape', valeur: appel?.nom },
+        { libelle: 'Durée', valeur: '30 minutes' },
+        { libelle: 'Prix', valeur: appel?.prix },
+        { libelle: 'Format', valeur: p.formatAppel, manque: 'visio ou téléphone' },
+      ]} />
+    </div>
+  </Section>
+
+  <Section fond="releve" titreId="titre-constat">
+    <div class="pile pile-48">
+      <div class="pile pile-16">
+        <h2 id="titre-constat" class="t-titre-2 mesure-titre">{a.constat.titre}</h2>
+        <p class="mesure">{a.constat.texte}</p>
+      </div>
+      <div class="grille grille-3">
+        {a.constat.points.map((pt: { titre: string; texte: string }) => (
+          <div class="pile pile-8 filet-haut">
+            <h3 class="t-titre-3">{pt.titre}</h3>
+            <p>{pt.texte}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Section>
+
+  <Section titreId="titre-methode">
+    <div class="pile pile-48">
+      <div class="pile pile-16">
+        <p class="pyr-label">{a.methode.label}</p>
+        <h2 id="titre-methode" class="t-titre-2 mesure-titre">{a.methode.titre}</h2>
+        <p class="mesure">{a.methode.texte}</p>
+      </div>
+      <div class="grille grille-2">
+        <div class="carte-verdict carte-verdict--or">
+          <Verdict type="or" />
+          <h3 class="t-titre-3">{a.methode.or.titre}</h3>
+          <p>{a.methode.or.texte}</p>
+        </div>
+        <div class="carte-verdict carte-verdict--pyrite">
+          <Verdict type="pyrite" />
+          <h3 class="t-titre-3">{a.methode.pyrite.titre}</h3>
+          <p>{a.methode.pyrite.texte}</p>
+        </div>
+      </div>
+      <div class="rangee rangee-espacee">
+        <p class="mesure">{a.methode.criteres}</p>
+        <LienAction href="/methode">Voir la méthode</LienAction>
+      </div>
+    </div>
+  </Section>
+
+  <Section fond="releve" titreId="titre-deroule">
+    <div class="pile pile-48">
+      <h2 id="titre-deroule" class="t-titre-2">{a.deroule.titre}</h2>
+      <ol class="grille grille-3" role="list" style="list-style: none; padding: 0;">
+        {a.deroule.etapes.map((e: { titre: string; texte: string }, i: number) => (
+          <li class="pile pile-8">
+            <span class="t-chiffre" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="t-titre-3">{e.titre}</h3>
+            <p>{e.texte}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <Section titreId="titre-offres">
+    <div class="pile pile-48">
+      <div class="pile pile-16">
+        <h2 id="titre-offres" class="t-titre-2">{a.offres.titre}</h2>
+        <p class="mesure">{a.offres.texte}</p>
+      </div>
+      <GrilleForfaits forfaits={o.forfaits} surDevis={o.surDevis} />
+      <LienAction href="/offres">Comparer les offres</LienAction>
+    </div>
+  </Section>
+
+  <Section fond="releve" titreId="titre-accompagnement">
+    <div class="presentation">
+      {a.accompagnement.portrait
+        ? <img src={a.accompagnement.portrait} alt={a.accompagnement.portraitAlt} width="360" height="440" loading="lazy" />
+        : <div class="emplacement-photo"><AFournir>portrait d'Ewan, traitement chaud et sobre, cadrage serré</AFournir></div>}
+      <div class="pile pile-16">
+        <p class="pyr-label">{a.accompagnement.label}</p>
+        <h2 id="titre-accompagnement" class="t-titre-2">{a.accompagnement.titre}</h2>
+        {rempli(a.accompagnement.parcours) ? <p class="mesure">{a.accompagnement.parcours}</p> : <AFournir bloc>votre parcours en 3 ou 4 lignes, en faits vérifiables</AFournir>}
+        {rempli(a.accompagnement.realisation) ? <p class="mesure">{a.accompagnement.realisation}</p> : <AFournir bloc>votre réalisation chez AXA, en chiffres vérifiables, sans logo</AFournir>}
+        <LienAction href="/a-propos">En savoir plus</LienAction>
+      </div>
+    </div>
+  </Section>
+
+  {afficherRetours && (
+    <Section titreId="titre-retours">
+      <div class="pile pile-32">
+        <h2 id="titre-retours" class="t-titre-2">Premiers retours</h2>
+        {retours.length > 0
+          ? <div class="grille grille-2">
+              {retours.map((r: { citation: string; prenom: string; fonction: string }) => (
+                <figure class="pile pile-16 filet-haut">
+                  <blockquote class="t-accroche" style="font-size: 20px">« {r.citation} »</blockquote>
+                  <figcaption class="pyr-label">{r.prenom} · {r.fonction}</figcaption>
+                </figure>
+              ))}
+            </div>
+          : <div class="grille grille-2">
+              <AFournir bloc>retour d'un testeur, avec son accord : citation, prénom, fonction (section invisible en ligne tant qu'elle est vide)</AFournir>
+              <AFournir bloc>retour d'un testeur, avec son accord : citation, prénom, fonction</AFournir>
+            </div>}
+      </div>
+    </Section>
+  )}
+
+  <Section fond="sombre" titreId="titre-final">
+    <div class="pile pile-centre">
+      <h2 id="titre-final" class="t-titre-2 mesure-titre">{a.final.titre}</h2>
+      <Diviseur class="diviseur-court" />
+      <p class="mesure">{a.final.texte}</p>
+      <Bouton href="/reserver" class="pleine-largeur-mobile">Réserver l'appel initial</Bouton>
+      <span class="t-annexe">{a.ouverture.mention}</span>
+    </div>
+  </Section>
+</Base>

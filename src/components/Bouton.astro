@@ -1,0 +1,10 @@
+---
+// Bouton du design system. Avec href : un lien qui a l'apparence d'un bouton.
+// Un seul bouton principal par écran ; libellé = verbe à l'infinitif + objet concret.
+interface Props { href?: string; variante?: 'principal' | 'secondaire'; class?: string; type?: 'button' | 'submit'; [key: string]: unknown }
+const { href, variante = 'principal', class: classe, type = 'button', ...rest } = Astro.props;
+const classes = ['pyr-btn', `pyr-btn-${variante}`, classe].filter(Boolean).join(' ');
+---
+{href
+  ? <a href={href} class={classes} {...rest}><slot /></a>
+  : <button type={type} class={classes} {...rest}><slot /></button>}

@@ -1,0 +1,7 @@
+---
+// Diviseur à facettes, seul motif du système : une fois par bloc, sous un titre. Décoratif (aria-hidden).
+interface Props { ton?: 'laiton' | 'reflet' | 'noir'; class?: string }
+const { ton = 'laiton', class: classe } = Astro.props;
+const TRACE = 'M0 8 H46 L58 3 H84 L92 8 H171 L180 4.5 H203 L214 8 H297 L306 2 H318 L331 8 H400';
+---
+<svg class:list={['pyr-diviseur', ton !== 'laiton' && `pyr-diviseur-${ton}`, classe]} viewBox="0 0 400 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d={TRACE} vector-effect="non-scaling-stroke" /></svg>

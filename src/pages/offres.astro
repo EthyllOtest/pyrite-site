@@ -1,0 +1,73 @@
+---
+// Page Offres : aperçu de toutes les offres, puis le détail de chacune (ancres), employeur, FAQ.
+// Textes : src/content/pages/page-offres.yaml ; prix et noms : catalogue offres.yaml.
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Bouton from '../components/Bouton.astro';
+import Diviseur from '../components/Diviseur.astro';
+import GrilleForfaits from '../components/GrilleForfaits.astro';
+import Texte from '../components/Texte.astro';
+import Faq from '../components/Faq.astro';
+import AppelFinal from '../components/AppelFinal.astro';
+import { insecable } from '../lib/texte';
+
+const pg = (await getEntry('pages', 'page-offres'))!.data;
+const o = (await getEntry('pages', 'offres'))!.data;
+const catalogue = [...o.forfaits, { ...o.surDevis, duree: 'Selon le besoin' }];
+const details = pg.details
+  .map((d: any) => ({ ...d, offre: catalogue.find((f: any) => f.reference === d.reference) }))
+  .filter((d: any) => d.offre);
+---
+<Base titre={pg.meta.titre} description={pg.meta.description}>
+  <Section titreId="titre-offres">
+    <div class="pile">
+      <p class="pyr-label">{pg.intro.label}</p>
+      <h1 id="titre-offres" class="t-titre-1">{pg.intro.titre}</h1>
+      <Diviseur class="diviseur-court" />
+      <p class="mesure">{pg.intro.texte}</p>
+      <div class="rangee">
+        <Bouton href="/reserver" class="pleine-largeur-mobile">Réserver l'appel initial</Bouton>
+        <span class="t-annexe">30 minutes · 29 €</span>
+      </div>
+    </div>
+  </Section>
+
+  <Section fond="releve" titreId="titre-apercu">
+    <h2 id="titre-apercu" class="visuellement-cache">Aperçu des offres</h2>
+    <GrilleForfaits forfaits={o.forfaits} surDevis={o.surDevis} lienBase="" />
+  </Section>
+
+  {details.map((d: any, i: number) => (
+    <Section fond={d.offre.sombre ? 'sombre' : i % 2 === 0 ? 'clair' : 'releve'} id={d.offre.ancre} titreId={`titre-${d.offre.ancre}`}>
+      <div class="detail-offre">
+        <div class="pile pile-8">
+          <p class="pyr-label">{d.offre.reference}{d.offre.reference === 'PYR-00' && " · Porte d'entrée"}</p>
+          <h2 id={`titre-${d.offre.ancre}`} class="t-titre-2">{d.offre.nom}</h2>
+          {d.offre.duree && <p class="detail-offre__duree">{insecable(d.offre.duree)}</p>}
+          <p class="detail-offre__prix">{d.offre.prix ? insecable(d.offre.prix) : 'Prix à confirmer'}</p>
+        </div>
+        <div class="pile pile-32">
+          {d.blocs.map((b: any) => (
+            <div class="pile pile-8 filet-haut">
+              <h3 class="t-intertitre" style="color: var(--texte-titre)">{b.titre}</h3>
+              <Texte valeur={b.texte} manque={b.manque || b.titre.toLowerCase()} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  ))}
+
+  <Section id="employeur" titreId="titre-employeur">
+    <div class="pile pile-16">
+      <p class="pyr-label">{pg.employeur.label}</p>
+      <h2 id="titre-employeur" class="t-titre-2">{pg.employeur.titre}</h2>
+      <p class="mesure">{pg.employeur.texte}</p>
+      <Texte valeur={pg.employeur.conditions} manque="conditions de facturation à l'employeur (devis, bon de commande, délai de paiement)" />
+    </div>
+  </Section>
+
+  <Faq questions={pg.faq} fond="releve" />
+  <AppelFinal titre={pg.final.titre} texte={pg.final.texte} />
+</Base>

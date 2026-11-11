@@ -1,0 +1,22 @@
+meta:
+  titre: À propos
+  description: "Ewan, fondateur de Pyrite : parcours, réalisations et origine du nom."
+intro:
+  label: À propos
+  titre: Ewan, fondateur de Pyrite
+  presentation: ''
+parcours:
+  titre: Parcours
+  etapes: []
+realisation:
+  label: Réalisation
+  titre: Chez AXA
+  texte: ''
+  chiffres: []
+nom:
+  label: Le nom
+  titre: Pourquoi « Pyrite »
+  texte: "La pyrite, surnommée « l'or des fous », ressemble à l'or sans en avoir la valeur. Elle représente l'IA mal utilisée : brillante, proche de l'or, sans sa valeur. Pyrite vous aide à faire la différence."
+final:
+  titre: Faire connaissance
+  texte: "Pendant l'appel initial, je vous présente aussi mon parcours et mes réalisations."

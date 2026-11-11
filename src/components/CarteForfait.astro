@@ -1,0 +1,19 @@
+---
+// Carte d'offre : référence et prix en IBM Plex Mono, nom en Fraunces, description en Public Sans.
+// Sans prix : « Prix à confirmer ». Une seule carte sombre par grille : l'Ultra.
+import LienAction from './LienAction.astro';
+import { insecable } from '../lib/texte';
+export interface Forfait { reference: string; nom: string; prix?: string; duree?: string; resume?: string; ancre?: string; sombre?: boolean }
+interface Props extends Forfait { ligne?: boolean; lien?: string; libelleLien?: string }
+const { reference, nom, prix, duree, resume, sombre = false, ligne = false, lien, libelleLien = 'Voir le détail' } = Astro.props;
+---
+<article class:list={['pyr-forfait', sombre && 'pyr-forfait-sombre', ligne && 'pyr-forfait-ligne']}>
+  <div class="pyr-forfait-tete">
+    <span class="pyr-ref">{reference}</span>
+    {prix ? <span class="pyr-prix">{insecable(prix)}</span> : <span class="pyr-a-confirmer">Prix à confirmer</span>}
+  </div>
+  <h3 class="pyr-forfait-nom">{nom}</h3>
+  {duree && <p class="pyr-forfait-duree">{insecable(duree)}</p>}
+  {resume && <p class="pyr-forfait-desc">{resume}</p>}
+  {lien && <LienAction href={lien}>{libelleLien}</LienAction>}
+</article>

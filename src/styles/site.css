@@ -1,0 +1,176 @@
+/* Mise en page du site Pyrite. Les couleurs, espacements et composants viennent du design system
+   (generated/tokens.css et generated/composants.css) ; ce fichier ne fait que les assembler. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: var(--font-texte);
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 350;
+}
+[data-theme] { color: var(--texte); }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--lien); }
+p, h1, h2, h3, h4, ul, ol, dl, figure { margin: 0; }
+ul[role="list"] { list-style: none; padding: 0; }
+:focus-visible { outline: var(--trait-focus) solid var(--focus); outline-offset: 2px; }
+
+/* Lien d'évitement : visible seulement au clavier. */
+.evitement { position: absolute; left: var(--espace-16); top: -100px; z-index: 100; background: var(--fond); padding: var(--espace-8) var(--espace-16); }
+.evitement:focus { top: var(--espace-16); }
+.visuellement-cache { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Conteneur : 1120 px de contenu, marges latérales de 24 px. */
+.conteneur { width: 100%; max-width: calc(1120px + 2 * var(--espace-24)); margin-inline: auto; padding-inline: var(--espace-24); }
+
+/* Sections */
+.section { padding-block: var(--espace-96); background: var(--fond); }
+.section--releve { background: var(--fond-releve); }
+@media (max-width: 639px) { .section { padding-block: var(--espace-64); } }
+
+/* Typographie (échelle web du design system ; titres réduits sur mobile) */
+.t-titre-1, .t-titre-2, .t-titre-3 { font-family: var(--font-display); color: var(--texte-titre); line-height: 1.1; font-optical-sizing: auto; }
+.t-titre-1 { font-size: 48px; font-weight: 400; }
+.t-titre-2 { font-size: 32px; font-weight: 400; }
+.t-titre-3 { font-size: 22px; font-weight: 500; line-height: 1.15; }
+@media (max-width: 639px) {
+  .t-titre-1 { font-size: 36px; }
+  .t-titre-2 { font-size: 28px; }
+  .t-titre-3 { font-size: 20px; }
+}
+.t-accroche { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 22px; line-height: 1.3; }
+@media (max-width: 639px) { .t-accroche { font-size: 20px; } }
+.t-intertitre { font-weight: 500; }
+.t-annexe { font-size: 13.5px; line-height: 1.6; color: var(--texte-attenue); }
+.t-chiffre { font-family: var(--font-display); font-size: 48px; line-height: 1.1; color: var(--texte-label); font-weight: 400; }
+@media (max-width: 639px) { .t-chiffre { font-size: 36px; } }
+.mesure { max-width: 68ch; }
+.mesure-titre { max-width: 760px; }
+.centre { text-align: center; margin-inline: auto; }
+
+/* Empilements et grilles (espacements du design system) */
+.pile { display: flex; flex-direction: column; gap: var(--espace-24); }
+.pile-8 { gap: var(--espace-8); }
+.pile-16 { gap: var(--espace-16); }
+.pile-32 { gap: var(--espace-32); }
+.pile-48 { gap: var(--espace-48); }
+.pile-centre { align-items: center; text-align: center; }
+.rangee { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espace-24); }
+.rangee-espacee { justify-content: space-between; }
+.grille { display: grid; gap: var(--espace-32); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) {
+  .grille-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--espace-24); }
+  .grille-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grille-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--espace-24); }
+}
+@media (min-width: 1024px) { .grille-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.filet-haut { border-top: var(--trait-filet) solid var(--ombre); padding-top: var(--espace-16); }
+
+/* Premier écran : message à gauche, fiche spécimen à droite */
+.ouverture { display: grid; gap: var(--espace-48); align-items: center; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1024px) { .ouverture { grid-template-columns: minmax(0, 1fr) 360px; gap: var(--espace-64); } }
+.ouverture .pyr-specimen { max-width: none; }
+.diviseur-court { width: 240px; max-width: 100%; }
+
+/* Boutons rendus comme liens */
+a.pyr-btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; text-align: center; }
+@media (max-width: 639px) { .pleine-largeur-mobile { width: 100%; } }
+@media (prefers-reduced-motion: no-preference) {
+  .pyr-btn, .pyr-lien { transition: background-color 150ms ease, text-decoration-thickness 150ms ease; }
+}
+
+/* Cartes de verdict (or / pyrite) */
+.carte-verdict { display: flex; flex-direction: column; align-items: flex-start; gap: var(--espace-16); padding: var(--espace-32); }
+.carte-verdict--or { background: var(--fond-releve); border: var(--trait-filet) solid var(--filet); }
+.carte-verdict--pyrite { border: var(--trait-filet) dashed var(--pyrite); }
+
+/* Grille des offres : pleine largeur, une colonne sous 640 px (README GrilleForfaits) */
+.pyr-forfaits { max-width: none; gap: var(--espace-24); }
+@media (max-width: 639px) { .pyr-forfaits { grid-template-columns: minmax(0, 1fr); } }
+.pyr-forfait .pyr-lien { margin-top: var(--espace-8); align-self: flex-start; }
+.pyr-forfait-ligne .pyr-lien { margin-top: 0; }
+
+/* Portrait */
+.presentation { display: grid; gap: var(--espace-32); grid-template-columns: minmax(0, 1fr); align-items: center; }
+@media (min-width: 1024px) { .presentation { grid-template-columns: 360px minmax(0, 1fr); gap: var(--espace-64); } }
+.emplacement-photo { aspect-ratio: 360 / 440; width: 100%; max-width: 360px; display: grid; place-items: center; background: var(--fond-releve); border: var(--trait-filet) solid var(--filet); }
+@media (max-width: 1023px) { .emplacement-photo { max-width: none; aspect-ratio: 4 / 3; } }
+
+/* Questions fréquentes (dépliants) */
+.faq { max-width: 760px; border-top: var(--trait-filet) solid var(--filet); }
+.faq__item { border-bottom: var(--trait-filet) solid var(--filet); }
+.faq__question { display: flex; justify-content: space-between; align-items: baseline; gap: var(--espace-16); padding-block: var(--espace-16); cursor: pointer; list-style: none; }
+.faq__question::-webkit-details-marker { display: none; }
+.faq__signe::before { content: "+"; font-family: var(--font-mono); font-weight: 500; font-size: 18px; }
+.faq__item[open] .faq__signe::before { content: "–"; }
+.faq__reponse { padding-bottom: var(--espace-16); display: flex; flex-direction: column; gap: var(--espace-8); }
+
+/* Détail d'une offre : repère à gauche, blocs à droite */
+.detail-offre { display: grid; gap: var(--espace-32); grid-template-columns: minmax(0, 1fr); scroll-margin-top: 96px; }
+@media (min-width: 1024px) { .detail-offre { grid-template-columns: 360px minmax(0, 1fr); gap: var(--espace-64); } }
+.detail-offre__prix { font-family: var(--font-mono); font-weight: 500; font-size: 22px; letter-spacing: .02em; color: var(--texte); white-space: nowrap; }
+.detail-offre__duree { font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--texte-label); }
+[data-theme="sombre"] .filet-haut { border-top-color: var(--filet); }
+[id] { scroll-margin-top: 96px; }
+
+/* Calendly : chargé seulement au clic (pas de cookie avant le consentement) */
+.calendrier { min-height: 520px; display: grid; place-items: center; padding: var(--espace-48) var(--espace-24); background: var(--fond); border: var(--trait-filet) solid var(--filet); text-align: center; }
+.calendrier iframe { width: 100%; min-height: 700px; border: 0; }
+.calendrier.est-charge { padding: 0; display: block; }
+
+/* Sommaire des pages légales */
+.legal { display: grid; gap: var(--espace-32); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1024px) { .legal { grid-template-columns: 260px minmax(0, 680px); gap: var(--espace-64); } }
+.legal__sommaire { position: sticky; top: 112px; align-self: start; }
+@media (max-width: 1023px) { .legal__sommaire { display: none; } }
+
+/* Parcours (À propos) */
+.parcours { list-style: none; padding: 0; border-top: var(--trait-filet) solid var(--ombre); }
+.parcours__etape { display: grid; gap: var(--espace-8); padding-block: var(--espace-16); border-bottom: var(--trait-filet) solid var(--filet); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) { .parcours__etape { grid-template-columns: 200px minmax(0, 1fr); gap: var(--espace-32); align-items: baseline; } }
+
+/* Repère de contenu manquant : visible tant que le contenu n'est pas fourni. */
+.a-fournir { display: inline-block; max-width: 100%; padding: var(--espace-8) 12px; background: var(--erreur-fond); border: var(--trait-filet) dashed var(--erreur); color: var(--texte); font-family: var(--font-mono); font-size: 13px; line-height: 1.5; }
+.a-fournir--bloc { display: block; }
+
+/* En-tête : fixe au défilement */
+.en-tete { position: sticky; top: 0; z-index: 50; background: var(--fond); border-bottom: var(--trait-filet) solid var(--filet); }
+.en-tete__barre { display: flex; align-items: center; justify-content: space-between; gap: var(--espace-24); padding-block: var(--espace-16); }
+@media (min-width: 768px) { .en-tete__barre { padding-block: var(--espace-24); } }
+.wordmark { font-family: var(--font-display); font-weight: 300; font-size: 24px; line-height: 1; letter-spacing: .2em; margin-right: -.2em; color: var(--texte-titre); text-decoration: none; font-variation-settings: "opsz" 144; }
+.nav { display: flex; align-items: center; gap: var(--espace-32); }
+.nav__liens { display: flex; gap: var(--espace-32); list-style: none; padding: 0; margin: 0; }
+.nav__liens a { color: var(--texte); text-decoration: none; }
+.nav__liens a:hover, .nav__liens a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.menu-bouton { display: none; }
+@media (max-width: 767px) {
+  .menu-bouton { display: inline-flex; }
+  .nav { display: none; }
+  .en-tete.est-ouvert .nav { display: flex; flex-direction: column; align-items: stretch; gap: var(--espace-24); position: absolute; left: 0; right: 0; top: 100%; min-height: calc(100dvh - 100%); padding: var(--espace-24); background: var(--fond); border-top: var(--trait-filet) solid var(--filet); }
+  .en-tete.est-ouvert .nav__liens { flex-direction: column; gap: 0; }
+  .en-tete.est-ouvert .nav__liens a { display: block; padding-block: var(--espace-16); border-bottom: var(--trait-filet) solid var(--filet); font-family: var(--font-display); font-size: 24px; line-height: 1.2; }
+  .en-tete.est-ouvert .nav .pyr-btn { width: 100%; }
+  /* Menu ouvert : le contenu est masqué, le bouton de réservation redevient le bouton principal (wireframe validé). */
+  .en-tete.est-ouvert .nav .pyr-btn-secondaire { background: var(--accent); color: var(--sur-accent); border-color: var(--ombre); }
+  .en-tete.est-ouvert .nav .pyr-btn-secondaire:hover { background: var(--reflet); }
+}
+
+/* Pied de page */
+.pied { background: var(--fond); border-top: var(--trait-filet) solid var(--filet); padding-block: var(--espace-64) var(--espace-48); }
+@media (max-width: 639px) { .pied { padding-top: var(--espace-48); } }
+.pied__colonnes { display: grid; gap: var(--espace-32); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) { .pied__colonnes { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--espace-48); } }
+.pied__liste { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--espace-8); }
+.pied__liste a { color: var(--texte); text-decoration: none; }
+.pied__liste a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.pied__bas { margin-top: var(--espace-32); padding-top: var(--espace-16); border-top: var(--trait-filet) solid var(--filet); display: flex; flex-wrap: wrap; align-items: center; gap: var(--espace-8); }
+
+/* Réduire les animations si le système le demande */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }

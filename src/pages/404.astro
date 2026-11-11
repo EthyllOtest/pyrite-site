@@ -1,0 +1,21 @@
+---
+// Page introuvable : une phrase, deux chemins.
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Diviseur from '../components/Diviseur.astro';
+import LienAction from '../components/LienAction.astro';
+---
+<Base titre="Page introuvable" description="Cette page n'existe pas ou a été déplacée.">
+  <Section titreId="titre-404">
+    <div class="pile">
+      <p class="pyr-label">Erreur 404</p>
+      <h1 id="titre-404" class="t-titre-1 mesure-titre">Cette page n'existe pas ou a été déplacée.</h1>
+      <Diviseur class="diviseur-court" />
+      <p class="mesure">Vous pouvez revenir à l'accueil ou consulter les offres.</p>
+      <div class="rangee">
+        <LienAction href="/">Retour à l'accueil</LienAction>
+        <LienAction href="/offres">Voir les offres</LienAction>
+      </div>
+    </div>
+  </Section>
+</Base>

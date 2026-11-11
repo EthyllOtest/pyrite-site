@@ -1,0 +1,36 @@
+meta:
+  titre: Réserver l'appel initial
+  description: "Réservez l'appel initial de Pyrite : 30 minutes, 29 €, pour comprendre votre situation et repérer où l'IA peut vous aider."
+intro:
+  label: PYR-00 · Appel initial
+  titre: Réserver l'appel initial
+  texte: "30 minutes pour comprendre votre situation et repérer où l'IA peut vous aider. À la fin, je vous présente les options avec mon conseil."
+  suite: Le devis suit dans l'heure ; vous décidez ensuite.
+deroule:
+  titre: Ce qui se passe pendant 30 minutes
+  etapes:
+    - titre: Votre situation
+      texte: Votre poste, ce que vous avez déjà essayé avec l'IA, ce qui vous a freiné.
+    - titre: Vos tâches
+      texte: "Pour chacune : le temps qu'elle prend, ce qui la rend pénible, à quoi ressemble un bon résultat."
+    - titre: Vos contraintes
+      texte: Votre objectif, l'échéance, qui finance, les données que vous manipulez.
+    - titre: Les options et mon conseil
+      texte: Les offres, puis celle que je vous recommande, et pourquoi.
+avant:
+  titre: Avant l'appel
+  texte: "À la réservation, un court formulaire d'environ 2 minutes : votre poste et votre secteur, votre usage actuel de l'IA, 2 ou 3 tâches qui vous prennent du temps chaque semaine."
+  formulaire: ''
+reservation:
+  titre: Choisir un créneau
+  texte: "Le calendrier de réservation s'ouvre ici : choix du créneau, formulaire préalable, paiement de 29 €."
+  mentions: En réservant, vous acceptez les conditions générales de vente. Vos réponses au formulaire sont traitées selon la politique de confidentialité.
+faq:
+  - question: Faut-il préparer quelque chose ?
+    reponse: Le formulaire suffit. Pensez à 2 ou 3 tâches concrètes de votre semaine.
+  - question: Puis-je annuler ou déplacer l'appel ?
+    reponse: ''
+  - question: Et si aucune offre ne me convient ?
+    reponse: ''
+  - question: Mes réponses sont-elles confidentielles ?
+    reponse: ''

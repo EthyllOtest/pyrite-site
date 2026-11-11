@@ -1,0 +1,11 @@
+---
+// Affiche un texte (paragraphes séparés par une ligne vide) ou, s'il est vide, un repère « À FOURNIR ».
+import AFournir from './AFournir.astro';
+import { rempli } from '../lib/texte';
+interface Props { valeur?: string | null; manque: string; class?: string }
+const { valeur, manque, class: classe } = Astro.props;
+const paragraphes = rempli(valeur) ? String(valeur).split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean) : [];
+---
+{paragraphes.length
+  ? paragraphes.map((p) => <p class:list={['mesure', classe]}>{p}</p>)
+  : <AFournir bloc>{manque}</AFournir>}

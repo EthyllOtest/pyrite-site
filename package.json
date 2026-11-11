@@ -1,0 +1,26 @@
+{
+  "name": "pyrite-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Site web de Pyrite (Astro + Keystatic, hébergé sur Cloudflare).",
+  "type": "module",
+  "scripts": {
+    "ds:sync": "node scripts/sync-design-system.mjs",
+    "dev": "npm run ds:sync && astro dev",
+    "build": "npm run ds:sync && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "14.4.7",
+    "@astrojs/markdoc": "2.1.4",
+    "@astrojs/react": "7.1.7",
+    "@fontsource-variable/fraunces": "5.3.0",
+    "@fontsource-variable/public-sans": "5.3.0",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@keystatic/astro": "6.0.0",
+    "@keystatic/core": "0.6.9",
+    "astro": "7.4.10",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  }
+}

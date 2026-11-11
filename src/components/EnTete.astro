@@ -1,0 +1,38 @@
+---
+// En-tête commun, fixe au défilement. Bouton secondaire : le seul bouton principal de l'écran est dans le contenu.
+// Sur la page Réserver, le bouton est masqué (avecBouton={false}).
+import Bouton from './Bouton.astro';
+interface Props { actuel?: string; avecBouton?: boolean }
+const { actuel = Astro.url.pathname, avecBouton = true } = Astro.props;
+const liens = [
+  { href: '/offres', texte: 'Offres' },
+  { href: '/methode', texte: 'Méthode' },
+  { href: '/a-propos', texte: 'À propos' },
+];
+---
+<header class="en-tete" data-en-tete>
+  <div class="conteneur en-tete__barre">
+    <a href="/" class="wordmark" aria-label="Pyrite, accueil">PYRITE</a>
+    <Bouton variante="secondaire" class="menu-bouton" aria-expanded="false" aria-controls="navigation-principale" data-menu-bouton>Menu</Bouton>
+    <nav class="nav" id="navigation-principale" aria-label="Navigation principale">
+      <ul class="nav__liens">
+        {liens.map((l) => <li><a href={l.href} aria-current={actuel.startsWith(l.href) ? 'page' : undefined}>{l.texte}</a></li>)}
+      </ul>
+      {avecBouton && <Bouton href="/reserver" variante="secondaire">Réserver l'appel initial</Bouton>}
+    </nav>
+  </div>
+</header>
+<script>
+  // Menu mobile : ouvre et ferme la navigation ; Échap la ferme.
+  const entete = document.querySelector<HTMLElement>('[data-en-tete]');
+  const bouton = document.querySelector<HTMLButtonElement>('[data-menu-bouton]');
+  if (entete && bouton) {
+    const basculer = (ouvert: boolean) => {
+      entete.classList.toggle('est-ouvert', ouvert);
+      bouton.setAttribute('aria-expanded', String(ouvert));
+      bouton.textContent = ouvert ? 'Fermer' : 'Menu';
+    };
+    bouton.addEventListener('click', () => basculer(!entete.classList.contains('est-ouvert')));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && entete.classList.contains('est-ouvert')) { basculer(false); bouton.focus(); } });
+  }
+</script>

@@ -1,0 +1,21 @@
+---
+// Questions fréquentes en dépliants (balise <details> : accessible au clavier, sans programmation).
+// Fermés par défaut ; une réponse vide affiche un repère « À FOURNIR ».
+import Section from './Section.astro';
+import Texte from './Texte.astro';
+interface Props { questions: { question: string; reponse?: string }[]; fond?: 'clair' | 'releve'; titre?: string }
+const { questions, fond = 'clair', titre = 'Questions fréquentes' } = Astro.props;
+---
+<Section fond={fond} titreId="titre-faq">
+  <div class="pile pile-32">
+    <h2 id="titre-faq" class="t-titre-2">{titre}</h2>
+    <div class="faq">
+      {questions.map((q) => (
+        <details class="faq__item">
+          <summary class="faq__question"><span class="t-intertitre">{q.question}</span><span class="faq__signe" aria-hidden="true"></span></summary>
+          <div class="faq__reponse"><Texte valeur={q.reponse} manque={`réponse à « ${q.question} »`} /></div>
+        </details>
+      ))}
+    </div>
+  </div>
+</Section>

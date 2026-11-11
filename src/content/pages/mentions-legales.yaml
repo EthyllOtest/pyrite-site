@@ -1,0 +1,18 @@
+meta:
+  titre: Mentions légales
+  description: Mentions légales du site de Pyrite.
+titre: Mentions légales
+miseAJour: ''
+sections:
+  - titre: Éditeur du site
+    texte: ''
+    manque: nom, statut micro-entreprise, SIRET, adresse ou domiciliation, e-mail
+  - titre: Hébergeur
+    texte: ''
+    manque: nom, adresse et téléphone de l'hébergeur (Cloudflare)
+  - titre: TVA
+    texte: ''
+    manque: mention TVA, par exemple « TVA non applicable, art. 293 B du CGI »
+  - titre: Propriété intellectuelle
+    texte: ''
+    manque: textes, wordmark, Pyra et Athanor

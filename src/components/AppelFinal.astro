@@ -1,0 +1,17 @@
+---
+// Appel final en thème sombre : le moment fort de chaque page, avec le bouton principal.
+import Section from './Section.astro';
+import Diviseur from './Diviseur.astro';
+import Bouton from './Bouton.astro';
+interface Props { titre: string; texte: string; mention?: string }
+const { titre, texte, mention = '30 minutes · 29 €' } = Astro.props;
+---
+<Section fond="sombre" titreId="titre-final">
+  <div class="pile pile-centre">
+    <h2 id="titre-final" class="t-titre-2 mesure-titre">{titre}</h2>
+    <Diviseur class="diviseur-court" />
+    <p class="mesure">{texte}</p>
+    <Bouton href="/reserver" class="pleine-largeur-mobile">Réserver l'appel initial</Bouton>
+    <span class="t-annexe">{mention}</span>
+  </div>
+</Section>

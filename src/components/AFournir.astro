@@ -1,0 +1,6 @@
+---
+// Repère visible d'un contenu manquant. Rien n'est inventé : le texte décrit ce qu'il faut fournir.
+interface Props { bloc?: boolean }
+const { bloc = false } = Astro.props;
+---
+<span class:list={['a-fournir', bloc && 'a-fournir--bloc']}>[À FOURNIR : <slot />]</span>

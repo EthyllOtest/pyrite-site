@@ -1,0 +1,39 @@
+---
+// Gabarit commun des pages légales : sommaire à gauche (ordinateur), texte d'environ 68 caractères par ligne.
+// Aucun texte légal n'est rédigé ici : chaque section vide affiche ce qu'il faut fournir.
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Section from './Section.astro';
+import Texte from './Texte.astro';
+import AFournir from './AFournir.astro';
+import { rempli } from '../lib/texte';
+interface Props { fichier: 'mentions-legales' | 'confidentialite' | 'cgv' }
+const { fichier } = Astro.props;
+const d = (await getEntry('pages', fichier))!.data;
+const ancre = (s: string, i: number) => `section-${i + 1}`;
+---
+<Base titre={d.meta.titre} description={d.meta.description}>
+  <Section titreId="titre-legal">
+    <div class="legal">
+      <nav class="legal__sommaire pile pile-8" aria-label="Sur cette page">
+        <p class="pyr-label">Sur cette page</p>
+        <ul class="pied__liste">
+          {d.sections.map((s: any, i: number) => <li><a href={`#${ancre(s.titre, i)}`}>{s.titre}</a></li>)}
+        </ul>
+      </nav>
+      <div class="pile pile-32">
+        <div class="pile pile-16">
+          <p class="pyr-label">Informations légales</p>
+          <h1 id="titre-legal" class="t-titre-1">{d.titre}</h1>
+          <p class="t-annexe">Dernière mise à jour : {rempli(d.miseAJour) ? d.miseAJour : <AFournir>date</AFournir>}</p>
+        </div>
+        {d.sections.map((s: any, i: number) => (
+          <section id={ancre(s.titre, i)} class="pile pile-8 filet-haut" aria-labelledby={`${ancre(s.titre, i)}-titre`}>
+            <h2 id={`${ancre(s.titre, i)}-titre`} class="t-titre-3">{s.titre}</h2>
+            <Texte valeur={s.texte} manque={s.manque || s.titre.toLowerCase()} />
+          </section>
+        ))}
+      </div>
+    </div>
+  </Section>
+</Base>

@@ -1,0 +1,95 @@
+---
+// Page Méthode : le discernement, la grille or / pyrite (principe et 4 critères), la méthode 4D.
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Bouton from '../components/Bouton.astro';
+import Diviseur from '../components/Diviseur.astro';
+import Verdict from '../components/Verdict.astro';
+import AppelFinal from '../components/AppelFinal.astro';
+
+const m = (await getEntry('pages', 'methode'))!.data;
+---
+<Base titre={m.meta.titre} description={m.meta.description}>
+  <Section titreId="titre-methode">
+    <div class="pile">
+      <p class="pyr-label">{m.intro.label}</p>
+      <h1 id="titre-methode" class="t-titre-1">{m.intro.titre}</h1>
+      <Diviseur class="diviseur-court" />
+      <p class="mesure">{m.intro.texte}</p>
+      <div class="rangee">
+        <Bouton href="/reserver" class="pleine-largeur-mobile">Réserver l'appel initial</Bouton>
+        <span class="t-annexe">30 minutes · 29 €</span>
+      </div>
+    </div>
+  </Section>
+
+  <Section fond="releve" titreId="titre-pourquoi">
+    <div class="pile">
+      <h2 id="titre-pourquoi" class="t-titre-2">{m.pourquoi.titre}</h2>
+      <p class="mesure">{m.pourquoi.texte}</p>
+    </div>
+  </Section>
+
+  <Section titreId="titre-grille">
+    <div class="pile pile-48">
+      <div class="pile pile-16">
+        <p class="pyr-label">{m.grille.label}</p>
+        <h2 id="titre-grille" class="t-titre-2">{m.grille.titre}</h2>
+        <p class="mesure">{m.grille.texte}</p>
+      </div>
+      <div class="grille grille-2">
+        <div class="carte-verdict carte-verdict--or"><Verdict type="or" /><h3 class="t-titre-3">{m.grille.or.titre}</h3><p>{m.grille.or.texte}</p></div>
+        <div class="carte-verdict carte-verdict--pyrite"><Verdict type="pyrite" /><h3 class="t-titre-3">{m.grille.pyrite.titre}</h3><p>{m.grille.pyrite.texte}</p></div>
+      </div>
+      <ol class="grille grille-4" role="list" style="list-style: none; padding: 0;">
+        {m.grille.criteres.map((c: any, i: number) => (
+          <li class="pile pile-8 filet-haut">
+            <span class="pyr-label">Critère {i + 1}</span>
+            <h3 class="t-titre-3">{c.titre}</h3>
+            <p>{c.texte}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <Section fond="releve" titreId="titre-4d">
+    <div class="pile pile-48">
+      <div class="pile pile-16">
+        <p class="pyr-label">{m.quatreD.label}</p>
+        <h2 id="titre-4d" class="t-titre-2">{m.quatreD.titre}</h2>
+        <p class="mesure">{m.quatreD.texte}</p>
+      </div>
+      <ol class="grille grille-4" role="list" style="list-style: none; padding: 0;">
+        {m.quatreD.etapes.map((e: any, i: number) => (
+          <li class="pile pile-16 filet-haut">
+            <span class:list={['pyr-etape', i === 0 && 'is-actif']}><span class="pyr-etape-num">0{i + 1}</span><span class="pyr-etape-nom">{e.nom}</span></span>
+            <p>{e.texte}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <Section titreId="titre-engagements">
+    <div class="pile pile-48">
+      <h2 id="titre-engagements" class="t-titre-2">{m.engagements.titre}</h2>
+      <div class="grille grille-3">
+        {m.engagements.points.map((p: any) => (
+          <div class="pile pile-8 filet-haut"><h3 class="t-titre-3">{p.titre}</h3><p>{p.texte}</p></div>
+        ))}
+      </div>
+    </div>
+  </Section>
+
+  <Section fond="releve" titreId="titre-donnees">
+    <div class="pile pile-16">
+      <p class="pyr-label">{m.donnees.label}</p>
+      <h2 id="titre-donnees" class="t-titre-2">{m.donnees.titre}</h2>
+      <p class="mesure">{m.donnees.texte}</p>
+    </div>
+  </Section>
+
+  <AppelFinal titre={m.final.titre} texte={m.final.texte} />
+</Base>
