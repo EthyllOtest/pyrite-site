@@ -1,5 +1,8 @@
 // Éditeur de textes Keystatic : définit ce qu'Ewan peut modifier depuis /keystatic.
-// Stockage local pour l'instant ; passage en mode GitHub au moment de la mise en ligne.
+// En ligne : les textes sont lus et enregistrés dans le dépôt GitHub (connexion avec le compte GitHub d'Ewan),
+// et chaque enregistrement relance la construction du site sur Cloudflare.
+// Sur l'ordinateur (npm run dev) : enregistrement direct dans les fichiers, sauf si PUBLIC_KEYSTATIC_GITHUB=oui
+// (utile une seule fois, pour créer l'application GitHub de Keystatic).
 // Règle commune : un texte laissé vide s'affiche sur le site comme un repère « À FOURNIR ».
 import { config, fields, singleton } from '@keystatic/core';
 
@@ -24,8 +27,10 @@ const pageLegale = (label: string, fichier: string) => page(label, fichier, {
   }, { label: 'Section' })),
 });
 
+const modeGitHub = import.meta.env.PROD || import.meta.env.PUBLIC_KEYSTATIC_GITHUB === 'oui';
+
 export default config({
-  storage: { kind: 'local' },
+  storage: modeGitHub ? { kind: 'github', repo: 'EthyllOtest/pyrite-site' } : { kind: 'local' },
   ui: {
     brand: { name: 'Pyrite' },
     navigation: {
