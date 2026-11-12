@@ -19,8 +19,17 @@ deroule:
       texte: Les offres, puis celle que je vous recommande, et pourquoi.
 avant:
   titre: Avant l'appel
-  texte: "À la réservation, un court formulaire d'environ 2 minutes : votre poste et votre secteur, votre usage actuel de l'IA, 2 ou 3 tâches qui vous prennent du temps chaque semaine."
-  formulaire: ''
+  texte: "À la réservation, un court formulaire de 5 questions, environ 3 minutes. Vos réponses me permettent de préparer l'appel et ma recommandation."
+  formulaire: |-
+    1. Quel est votre poste, et dans quel secteur travaillez-vous ?
+
+    2. Utilisez-vous déjà des outils d'IA (ChatGPT, Claude, Gemini, Copilot…) ? Jamais, de temps en temps, chaque semaine ou chaque jour ; et lesquels.
+
+    3. Citez 2 ou 3 tâches qui vous prennent du temps chaque semaine.
+
+    4. Qu'aimeriez-vous avoir changé, et pour quand ?
+
+    5. Qui finance l'accompagnement, vous ou votre employeur ? Votre employeur encadre-t-il l'usage de l'IA ?
 reservation:
   titre: Choisir un créneau
   texte: "Le calendrier de réservation s'ouvre ici : choix du créneau, formulaire préalable, paiement de 29 €."
@@ -29,7 +38,7 @@ faq:
   - question: Faut-il préparer quelque chose ?
     reponse: Le formulaire suffit. Pensez à 2 ou 3 tâches concrètes de votre semaine.
   - question: Puis-je annuler ou déplacer l'appel ?
-    reponse: ''
+    reponse: "Oui, jusqu'à 24 heures avant, depuis l'e-mail de confirmation : vous choisissez un autre créneau, ou vous annulez et les 29 € vous sont remboursés. Moins de 24 heures avant, l'appel reste dû."
   - question: Et si aucune offre ne me convient ?
     reponse: ''
   - question: Mes réponses sont-elles confidentielles ?

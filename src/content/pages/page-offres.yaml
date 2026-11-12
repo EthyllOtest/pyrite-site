@@ -18,7 +18,7 @@ details:
         texte: Une recommandation argumentée, et un premier repère sur la tâche la plus favorable. Le devis suit dans l'heure.
         manque: ''
       - titre: Format
-        texte: ''
+        texte: "En visio. Le lien de connexion arrive avec l'e-mail de confirmation."
         manque: visio ou téléphone
   - reference: PYR-01
     blocs:

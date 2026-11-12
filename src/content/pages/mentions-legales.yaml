@@ -8,10 +8,10 @@ sections:
     texte: ''
     manque: nom, statut micro-entreprise, SIRET, adresse ou domiciliation, e-mail
   - titre: Hébergeur
-    texte: ''
+    texte: "Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, États-Unis. Téléphone : +1 650 319 8930. Site : cloudflare.com"
     manque: nom, adresse et téléphone de l'hébergeur (Cloudflare)
   - titre: TVA
-    texte: ''
+    texte: TVA non applicable, article 293 B du Code général des impôts.
     manque: mention TVA, par exemple « TVA non applicable, art. 293 B du CGI »
   - titre: Propriété intellectuelle
     texte: ''
