@@ -42,8 +42,8 @@ offres:
 accompagnement:
   label: Qui vous accompagne
   titre: Ewan, fondateur de Pyrite
-  portrait: null
-  portraitAlt: ''
+  portrait: /images/portrait-ewan.jpg
+  portraitAlt: Portrait d'Ewan Charpentier, fondateur de Pyrite.
   parcours: "Autodidacte en IA générative, je poursuis un master Manager Digital Innovation & Transformation IA. J'ai été pendant 2 ans assistant chef de projet marketing chez Verbateam, filiale de prévention santé d'AXA."
   realisation: "J'y ai conçu un méta-prompt, une instruction qui aide à construire d'autres instructions pour l'IA. Validé par AXA, il a été publié dans la bibliothèque interne du groupe, à la disposition de tous ses collaborateurs."
 retours: []

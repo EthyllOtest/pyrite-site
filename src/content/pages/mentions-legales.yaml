@@ -5,8 +5,11 @@ titre: Mentions légales
 miseAJour: ''
 sections:
   - titre: Éditeur du site
+    texte: "Le site est édité par Ewan Charpentier, entrepreneur individuel (micro-entreprise), sous le nom commercial Pyrite. SIRET : 130 635 626 00018. E-mail : ewan.charpentier@proton.me. Directeur de la publication : Ewan Charpentier."
+    manque: nom, statut micro-entreprise, SIRET, e-mail
+  - titre: Adresse de l'éditeur
     texte: ''
-    manque: nom, statut micro-entreprise, SIRET, adresse ou domiciliation, e-mail
+    manque: adresse professionnelle ou de domiciliation (obligatoire)
   - titre: Hébergeur
     texte: "Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, États-Unis. Téléphone : +1 650 319 8930. Site : cloudflare.com"
     manque: nom, adresse et téléphone de l'hébergeur (Cloudflare)

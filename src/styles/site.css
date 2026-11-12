@@ -99,6 +99,8 @@ a.pyr-btn { display: inline-flex; align-items: center; justify-content: center; 
 @media (min-width: 1024px) { .presentation { grid-template-columns: 360px minmax(0, 1fr); gap: var(--espace-64); } }
 .emplacement-photo { aspect-ratio: 360 / 440; width: 100%; max-width: 360px; display: grid; place-items: center; background: var(--fond-releve); border: var(--trait-filet) solid var(--filet); }
 @media (max-width: 1023px) { .emplacement-photo { max-width: none; aspect-ratio: 4 / 3; } }
+/* Portrait : même cadre que l'emplacement, sans déformer la photo. */
+.presentation img { display: block; width: 100%; max-width: 360px; height: auto; aspect-ratio: 360 / 440; object-fit: cover; }
 
 /* Questions fréquentes (dépliants) */
 .faq { max-width: 760px; border-top: var(--trait-filet) solid var(--filet); }
