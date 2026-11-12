@@ -3,5 +3,5 @@ meta:
   description: Votre appel initial avec Pyrite est réservé.
 message: Votre paiement est reçu et votre créneau réservé.
 titre: Votre appel initial est réservé
-email: ''
+email: "Il contient la date, l'heure et le lien de la visio, ainsi que les liens pour déplacer ou annuler jusqu'à 24 heures avant. Un rappel vous est envoyé la veille. Votre facture suit par e-mail."
 preparation: "Pour préparer l'appel : pensez à 2 ou 3 tâches de votre semaine qui vous prennent du temps."

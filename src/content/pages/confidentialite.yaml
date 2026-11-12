@@ -8,20 +8,36 @@ sections:
     texte: ''
     manque: identité et coordonnées du responsable du traitement
   - titre: Données collectées
-    texte: ''
+    texte: |-
+      À la réservation : vos nom, prénom et e-mail, et vos réponses au formulaire (poste, secteur, usage de l'IA, tâches, objectif, financeur).
+
+      Pour le paiement : les données traitées par Stripe ; je ne vois jamais votre numéro de carte.
+
+      Pendant l'accompagnement : les exemples que vous choisissez de partager.
     manque: données du formulaire de réservation (poste, secteur, usage de l'IA, tâches), coordonnées, paiement
   - titre: Finalités et base légale
-    texte: ''
+    texte: |-
+      Préparer l'appel et vous adresser une recommandation, puis réaliser l'accompagnement : ces traitements reposent sur les mesures précontractuelles et l'exécution du contrat.
+
+      Établir et conserver les factures : ce traitement répond à une obligation légale.
     manque: pourquoi ces données sont collectées et sur quelle base
   - titre: Sous-traitants
-    texte: ''
+    texte: |-
+      Calendly (prise de rendez-vous), Stripe (paiement) et Cloudflare (hébergement du site). Ces sociétés sont établies aux États-Unis ; les transferts sont encadrés par les garanties prévues par le RGPD.
+
+      Le site n'utilise aucun outil de mesure d'audience.
     manque: Calendly, Stripe, Cloudflare, outil de mesure d'audience éventuel
   - titre: Durée de conservation
-    texte: ''
+    texte: |-
+      Réponses au formulaire et échanges : 3 ans après notre dernier contact.
+
+      Factures : 10 ans, comme l'impose la loi.
+
+      Exemples partagés pendant l'accompagnement : supprimés 3 mois après la fin de la prestation.
     manque: durée de conservation de chaque type de données
   - titre: Vos droits
     texte: ''
     manque: accès, rectification, suppression, opposition, réclamation auprès de la CNIL, et comment les exercer
   - titre: Cookies
-    texte: ''
+    texte: "Le site ne dépose aucun cookie de mesure ou de publicité. Le calendrier Calendly n'est chargé que si vous cliquez pour l'afficher : Calendly peut alors déposer ses propres cookies, selon sa politique."
     manque: cookies déposés (le calendrier Calendly n'est chargé qu'à votre demande)

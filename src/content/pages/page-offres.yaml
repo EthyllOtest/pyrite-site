@@ -26,10 +26,21 @@ details:
         texte: Si vous débutez avec l'IA.
         manque: ''
       - titre: Déroulé
-        texte: ''
+        texte: |-
+          Une séance de 60 minutes en visio, sur votre outil d'IA.
+
+          1. Ce que l'IA fait et ne fait pas, et pourquoi elle peut se tromper avec aplomb.
+
+          2. Trois façons de mieux formuler vos demandes (donner du contexte, préciser le format attendu, vérifier et retoucher), appliquées tout de suite à vos tâches.
+
+          3. La grille or / pyrite : le tri de vos tâches, entre celles où l'IA vous aide vraiment et celles où elle n'est qu'un faux-semblant.
+
+          4. Ce que vous testez la semaine suivante.
+
+          Il suffit d'un compte sur un outil d'IA ; l'offre gratuite convient.
         manque: déroulé de Premiers pas en 60 minutes
       - titre: Ce que vous emportez
-        texte: ''
+        texte: "Le support de la séance en PDF. Votre cartographie : chaque tâche classée or ou pyrite, avec la prochaine action. Un message de suivi qui rappelle la tâche à tester en premier."
         manque: livrables de Premiers pas
   - reference: PYR-02
     blocs:
@@ -40,7 +51,10 @@ details:
         texte: Deux séances, 60 puis 45 minutes, sur vos tâches réelles.
         manque: ''
       - titre: Contenu des séances
-        texte: ''
+        texte: |-
+          Séance 1, 60 minutes : vos tâches passées à la grille or / pyrite, et les bases d'une demande bien formulée, appliquées à vos tâches.
+
+          Séance 2, 45 minutes : retour sur ce que vous avez testé, remise de vos instructions pour 2 à 3 tâches, puis prise en main de Pyra sur une nouvelle tâche.
         manque: contenu de chaque séance
       - titre: Ce que vous emportez
         texte: "2 à 3 instructions optimisées pour vos tâches, construites par Pyrite. Pyra, l'assistant qui vous aide à construire vos propres instructions (usage personnel, non cessible)."
@@ -51,13 +65,16 @@ details:
         texte: Si vous voulez un outil construit pour votre métier, sans avoir à le concevoir vous-même.
         manque: ''
       - titre: Déroulé
-        texte: ''
+        texte: |-
+          Séance 1, 60 minutes : comprendre votre métier réel et choisir avec vous 1 à 3 tâches. Dans les 3 jours qui suivent, vous m'envoyez quelques exemples anonymisés de vos livrables.
+
+          Séance 2, 60 minutes, environ 7 jours ouvrés après réception de vos exemples : je vous remets Athanor, et nous construisons ensemble 2 instructions sur vos tâches réelles. La troisième vous est envoyée ensuite.
         manque: "déroulé des deux séances et délai de livraison d'Athanor"
       - titre: Ce que vous emportez
         texte: Athanor, construit sur mesure pour votre métier. 2 instructions construites en séance, la troisième envoyée ensuite.
         manque: ''
       - titre: Après la livraison
-        texte: ''
+        texte: "Pas de suivi programmé : je reste disponible 4 semaines par e-mail, avec une réponse sous 2 jours ouvrés, et un appel de 30 minutes si une question ne se règle pas par écrit. Les corrections d'Athanor sur les tâches livrées sont incluses ; de nouvelles tâches font l'objet d'un devis."
         manque: disponibilité en cas de question (pas de suivi programmé)
   - reference: PYR-MIS
     blocs:
@@ -74,16 +91,16 @@ employeur:
   label: Financement
   titre: Si votre employeur finance
   texte: "L'accompagnement peut être facturé à votre entreprise. Dites-le pendant l'appel initial : le devis est alors établi à son nom."
-  conditions: ''
+  conditions: "Le devis est établi au nom de l'entreprise. La facture est émise à réception du bon de commande, payable à 30 jours."
 faq:
   - question: Dois-je déjà utiliser l'IA ?
     reponse: Non. Premiers pas est fait pour démarrer, et l'appel initial sert à situer votre niveau.
   - question: Quels outils d'IA utilise-t-on ?
     reponse: "Celui que vous utilisez déjà ou que votre employeur autorise : ChatGPT, Claude, Gemini ou Copilot. Il n'y a pas de meilleur outil dans l'absolu."
   - question: Que devient ce que je montre pendant les séances ?
-    reponse: ''
+    reponse: "Les séances ne sont pas enregistrées. Je vous demande de travailler sur des exemples sans données confidentielles, ou anonymisés. Mes notes servent uniquement à préparer vos livrables et ne sont transmises à personne."
   - question: Peut-on passer d'une offre à l'autre ?
-    reponse: ''
+    reponse: "Oui, et ce que vous avez déjà payé est déduit. Après Premiers pas, l'Essentiel revient à 230 € ; après l'Essentiel, l'Ultra revient à 400 €."
 final:
   titre: "Le plus simple : en parler 30 minutes"
   texte: Vous décrivez votre situation ; je vous recommande l'offre qui vous correspond.
