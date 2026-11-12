@@ -85,7 +85,10 @@ details:
         texte: "On le cadre pendant l'appel initial, puis je vous envoie un devis."
         manque: ''
       - titre: Exemples
-        texte: ''
+        texte: |-
+          Des contenus professionnels, prêts à l'emploi : vidéos en motion design, contenus audio (musique, ambiances sonores), direction artistique et visuels graphiques, supports de présentation.
+
+          Pour les indépendants et les entreprises qui veulent un résultat abouti, sans le produire eux-mêmes.
         manque: "exemples de missions sur devis et à qui elles s'adressent"
 employeur:
   label: Financement

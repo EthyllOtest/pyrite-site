@@ -4,14 +4,26 @@ meta:
 intro:
   label: À propos
   titre: Ewan, fondateur de Pyrite
-  presentation: ''
+  presentation: |-
+    J'ai 22 ans, et j'ai appris l'IA générative en autodidacte, par la pratique : construire des instructions, les tester, les améliorer jusqu'à ce qu'elles donnent un résultat fiable.
+
+    J'ai créé Pyrite pour vous aider à prendre en main ces outils sur votre travail réel, en sachant où leur faire confiance et où s'en méfier.
 parcours:
   titre: Parcours
-  etapes: []
+  etapes:
+    - dates: 2 ans
+      texte: "Assistant chef de projet marketing chez Verbateam, filiale de prévention santé d'AXA. J'y ai conçu un méta-prompt, validé par AXA et mis à la disposition de ses collaborateurs."
+    - dates: En cours
+      texte: Master Manager Digital Innovation & Transformation IA.
+    - dates: Aujourd'hui
+      texte: "Fondateur de Pyrite : un accompagnement individuel pour utiliser l'IA là où elle vous aide vraiment."
 realisation:
   label: Réalisation
   titre: Chez AXA
-  texte: ''
+  texte: |-
+    Chez Verbateam, filiale de prévention santé d'AXA, j'étais assistant chef de projet marketing. En parallèle de mes missions, j'ai conçu un méta-prompt : une instruction qui aide à construire d'autres instructions pour l'IA, sur le même principe que Pyra.
+
+    Après validation par AXA, il a été publié dans la bibliothèque interne du groupe, à la disposition de tous ses collaborateurs.
   chiffres: []
 nom:
   label: Le nom

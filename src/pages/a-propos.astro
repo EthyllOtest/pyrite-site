@@ -50,11 +50,14 @@ const chiffres = (ap.realisation.chiffres ?? []).filter((c: any) => rempli(c.val
         <h2 id="titre-realisation" class="t-titre-2">{ap.realisation.titre}</h2>
         <Texte valeur={ap.realisation.texte} manque="contexte et ce que vous avez fait, en 3 ou 4 phrases, sans logo AXA ni capture interne" />
       </div>
-      <div class="grille grille-3">
-        {chiffres.length
-          ? chiffres.map((c: any) => <div class="pile pile-8 filet-haut"><span class="t-chiffre">{c.valeur}</span><p>{c.libelle}</p></div>)
-          : [1, 2, 3].map(() => <div class="pile pile-8 filet-haut"><span class="t-chiffre">[chiffre]</span><AFournir bloc>chiffre vérifiable et son libellé</AFournir></div>)}
-      </div>
+      {/* Sans chiffre vérifiable, la grille est masquée en ligne (repères visibles seulement en local). */}
+      {(chiffres.length > 0 || import.meta.env.DEV) && (
+        <div class="grille grille-3">
+          {chiffres.length
+            ? chiffres.map((c: any) => <div class="pile pile-8 filet-haut"><span class="t-chiffre">{c.valeur}</span><p>{c.libelle}</p></div>)
+            : [1, 2, 3].map(() => <div class="pile pile-8 filet-haut"><span class="t-chiffre">[chiffre]</span><AFournir bloc>chiffre vérifiable et son libellé (grille invisible en ligne tant qu'elle est vide)</AFournir></div>)}
+        </div>
+      )}
     </div>
   </Section>
 

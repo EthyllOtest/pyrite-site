@@ -2,10 +2,10 @@ meta:
   titre: Politique de confidentialité
   description: Comment Pyrite traite vos données personnelles.
 titre: Politique de confidentialité
-miseAJour: ''
+miseAJour: 12 novembre 2026
 sections:
   - titre: Responsable du traitement
-    texte: ''
+    texte: "Ewan Charpentier, entrepreneur individuel exerçant sous le nom commercial Pyrite. Contact : ewan.charpentier@proton.me"
     manque: identité et coordonnées du responsable du traitement
   - titre: Données collectées
     texte: |-
@@ -36,7 +36,10 @@ sections:
       Exemples partagés pendant l'accompagnement : supprimés 3 mois après la fin de la prestation.
     manque: durée de conservation de chaque type de données
   - titre: Vos droits
-    texte: ''
+    texte: |-
+      Vous pouvez accéder à vos données, les faire corriger ou supprimer, vous opposer à leur traitement ou en limiter l'usage, en écrivant à ewan.charpentier@proton.me. Je vous réponds sous un mois.
+
+      Vous pouvez aussi adresser une réclamation à la CNIL (cnil.fr).
     manque: accès, rectification, suppression, opposition, réclamation auprès de la CNIL, et comment les exercer
   - titre: Cookies
     texte: "Le site ne dépose aucun cookie de mesure ou de publicité. Le calendrier Calendly n'est chargé que si vous cliquez pour l'afficher : Calendly peut alors déposer ses propres cookies, selon sa politique."

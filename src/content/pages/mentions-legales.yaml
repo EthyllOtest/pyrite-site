@@ -14,5 +14,5 @@ sections:
     texte: TVA non applicable, article 293 B du Code général des impôts.
     manque: mention TVA, par exemple « TVA non applicable, art. 293 B du CGI »
   - titre: Propriété intellectuelle
-    texte: ''
+    texte: "Les contenus de ce site (textes, nom et logo Pyrite, noms et documents Pyra et Athanor) appartiennent à Ewan Charpentier, sauf mention contraire. Toute reproduction sans autorisation écrite est interdite."
     manque: textes, wordmark, Pyra et Athanor
