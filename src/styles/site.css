@@ -99,8 +99,16 @@ a.pyr-btn { display: inline-flex; align-items: center; justify-content: center; 
 @media (min-width: 1024px) { .presentation { grid-template-columns: 360px minmax(0, 1fr); gap: var(--espace-64); } }
 .emplacement-photo { aspect-ratio: 360 / 440; width: 100%; max-width: 360px; display: grid; place-items: center; background: var(--fond-releve); border: var(--trait-filet) solid var(--filet); }
 @media (max-width: 1023px) { .emplacement-photo { max-width: none; aspect-ratio: 4 / 3; } }
-/* Portrait : même cadre que l'emplacement, sans déformer la photo. */
-.presentation img { display: block; width: 100%; max-width: 360px; height: auto; aspect-ratio: 360 / 440; object-fit: cover; }
+/* Portrait : cadre arrondi avec un filet laiton détaché. Exception au rayon 0 du design system,
+   voulue par Ewan pour le seul portrait (registre des décisions, 12/11/2026). */
+:root { --rayon-portrait: 24px; --ecart-cadre-portrait: 8px; }
+.presentation img {
+  display: block; width: 100%; max-width: 360px; height: auto; aspect-ratio: 360 / 440; object-fit: cover;
+  border-radius: var(--rayon-portrait);
+  outline: var(--trait-filet) solid var(--accent); outline-offset: var(--ecart-cadre-portrait);
+  margin: var(--ecart-cadre-portrait);
+}
+.presentation .emplacement-photo { border-radius: var(--rayon-portrait); }
 
 /* Questions fréquentes (dépliants) */
 .faq { max-width: 760px; border-top: var(--trait-filet) solid var(--filet); }
