@@ -1,51 +1,37 @@
-// Cristal 3D de la section « Or ou pyrite » (Three.js), chargé seulement quand la section approche.
-// Un cube unique dont la matière glisse de la pyrite (striée, terne) à l'or (lisse, chaude) selon une
-// progression de 0 à 1 fournie par le défilement. Aucune image ni modèle externe : tout est généré ici.
+// Pyrite 3D de la section « Or ou pyrite » (Three.js), chargée seulement quand la section approche.
+// Modèle : scan de pyrite préparé par outils/preparer-modele.py (public/modeles/pyrite.glb).
+// L'objet a deux moitiés, séparées par un plan vertical passant par son centre :
+// devant la pyrite du scan, derrière de l'or lisse généré ici, avec le relief du scan.
+// Le défilement fait faire un demi-tour à l'objet (progression 0 → 1) ; quand la ligne de séparation
+// passe face à l'écran, un reflet balaie l'objet.
 import {
-  WebGLRenderer, Scene, PerspectiveCamera, BoxGeometry, MeshPhysicalMaterial, Mesh, Color,
-  CanvasTexture, RepeatWrapping, PMREMGenerator, DirectionalLight, NeutralToneMapping, Vector2,
+  WebGLRenderer, Scene, PerspectiveCamera, MeshPhysicalMaterial, Color, PMREMGenerator,
+  DirectionalLight, NeutralToneMapping, Vector3,
 } from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
 // Couleur lue dans les variables du design system (aucune valeur en dur).
 const variable = (el, nom) => new Color(getComputedStyle(el).getPropertyValue(nom).trim());
 
-// Stries de la pyrite : relief en fines crêtes parallèles, d'épaisseurs irrégulières, sous forme de carte de normales.
-function texteDesStries() {
-  const taille = 256;
-  const toile = document.createElement('canvas');
-  toile.width = toile.height = taille;
-  const ctx = toile.getContext('2d');
-  const image = ctx.createImageData(taille, taille);
-  for (let y = 0; y < taille; y++) {
-    const a = (2 * Math.PI * y) / taille;
-    // Pente du relief : trois ondes de fréquences entières, pour que le motif se répète sans couture.
-    const pente = 4.5 * Math.cos(9 * a) + 6.9 * Math.cos(23 * a + 1.3) + 6.2 * Math.cos(41 * a + 0.4);
-    let ny = -pente * 0.05;
-    let nz = 1;
-    const longueur = Math.hypot(ny, nz);
-    ny /= longueur; nz /= longueur;
-    for (let x = 0; x < taille; x++) {
-      const i = (y * taille + x) * 4;
-      image.data[i] = 128;
-      image.data[i + 1] = Math.round((ny * 0.5 + 0.5) * 255);
-      image.data[i + 2] = Math.round((nz * 0.5 + 0.5) * 255);
-      image.data[i + 3] = 255;
-    }
-  }
-  ctx.putImageData(image, 0, 0);
-  const texture = new CanvasTexture(toile);
-  texture.wrapS = texture.wrapT = RepeatWrapping;
-  return texture;
-}
-
-const lisser = (p) => p * p * (3 - 2 * p);
+// Réglages de la matière et du mouvement.
+const LARGEUR_TRANSITION = 0.012; // demi-largeur de la ligne pyrite / or, en unités de l'objet (profondeur ≈ 1,2)
+const RUGOSITE_PYRITE = 0.42;
+const RUGOSITE_OR = 0.16;
+const INCLINAISON = 0.12; // l'objet penche légèrement vers l'avant, pour qu'on voie un peu son dessus
+// Orientation du plan vertical de séparation (autour de l'axe vertical, passant par le centre) : choisie pour suivre
+// au mieux le contour de la pierre, afin qu'aucun liseré de l'autre matière ne dépasse de face ou de dos.
+const ANGLE_SEPARATION = (34 * Math.PI) / 180;
 
 /**
- * Crée le cristal dans `conteneur`. Renvoie null si WebGL n'est pas disponible (l'image fixe reste alors affichée).
+ * Crée la pyrite 3D dans `conteneur`.
+ * Renvoie null si WebGL n'est pas disponible (l'image fixe reste alors affichée) ;
+ * lève une erreur si le modèle ne se charge pas (l'appelant garde aussi l'image fixe).
  * @param {HTMLElement} conteneur
+ * @param {string} adresseModele
  */
-export function demarrer(conteneur) {
+export async function demarrer(conteneur, adresseModele) {
   let rendu;
   try {
     rendu = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
@@ -54,58 +40,95 @@ export function demarrer(conteneur) {
   }
   if (!rendu.getContext()) return null;
 
+  let gltf;
+  try {
+    const chargeur = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+    gltf = await chargeur.loadAsync(adresseModele);
+  } catch (erreur) {
+    rendu.dispose();
+    throw erreur;
+  }
+
   rendu.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   rendu.toneMapping = NeutralToneMapping;
   rendu.setClearColor(0x000000, 0);
   const toile = rendu.domElement;
   toile.setAttribute('aria-hidden', 'true');
   toile.className = 'cristal__toile';
-  conteneur.appendChild(toile);
 
   const scene = new Scene();
   const pmrem = new PMREMGenerator(rendu);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
   pmrem.dispose();
 
-  const lumiere = new DirectionalLight(variable(conteneur, '--reflet'), 1.4);
+  const reflet = variable(conteneur, '--reflet');
+  const lumiere = new DirectionalLight(reflet, 1.3);
   lumiere.position.set(2, 3, 2.5);
   scene.add(lumiere);
 
-  const camera = new PerspectiveCamera(30, 1, 0.1, 20);
-  camera.position.set(0, 0, 3.9);
+  const camera = new PerspectiveCamera(22, 1, 0.1, 20);
+  camera.position.set(0, 0, 6.1);
 
-  // Pyrite : un laiton terne, tiré vers le gris-vert du minéral. Or : le laiton de la marque.
-  const pyrite = variable(conteneur, '--ombre').lerp(variable(conteneur, '--pyrite'), 0.45);
-  const or = variable(conteneur, '--or');
+  // Valeurs partagées avec le shader : couleur de l'or, reflet et sa position.
+  const reglages = {
+    uOr: { value: variable(conteneur, '--or').lerp(reflet, 0.25) },
+    uNormale: { value: new Vector3(Math.sin(ANGLE_SEPARATION), 0, Math.cos(ANGLE_SEPARATION)) },
+    uReflet: { value: reflet },
+    uLargeur: { value: LARGEUR_TRANSITION },
+    uRugositeOr: { value: RUGOSITE_OR },
+    uBalayage: { value: -9 },
+    uEclat: { value: 0 },
+  };
 
-  const geometrie = new BoxGeometry(1, 1, 1);
-  // Comme sur un vrai cube de pyrite, les stries de deux faces voisines sont perpendiculaires :
-  // on fait pivoter les coordonnées de texture des faces latérales droite et gauche.
-  const uv = geometrie.attributes.uv;
-  for (let i = 0; i < 8; i++) { const u = uv.getX(i); uv.setXY(i, uv.getY(i), u); }
-
-  const matiere = new MeshPhysicalMaterial({
-    color: pyrite.clone(),
-    metalness: 1,
-    roughness: 0.55,
-    normalMap: texteDesStries(),
-    normalScale: new Vector2(1.1, 1.1),
-    clearcoat: 0,
-    clearcoatRoughness: 0.08,
+  const objet = gltf.scene;
+  objet.traverse((enfant) => {
+    if (!enfant.isMesh) return;
+    const carte = enfant.material.map;
+    // Pyrite : la texture du scan, légèrement teintée de laiton (« l'or des fous »).
+    const matiere = new MeshPhysicalMaterial({
+      map: carte, color: new Color(1, 1, 1).lerp(reflet, 0.3), metalness: 0.9, roughness: RUGOSITE_PYRITE,
+    });
+    // On complète le shader standard de Three.js : chaque pixel sait de quel côté du plan de séparation il se trouve.
+    matiere.onBeforeCompile = (shader) => {
+      Object.assign(shader.uniforms, reglages);
+      shader.vertexShader = shader.vertexShader
+        .replace('#include <common>', '#include <common>\nvarying vec3 vPosObjet;\nvarying vec3 vPosMonde;')
+        .replace('#include <project_vertex>', '#include <project_vertex>\nvPosObjet = transformed;\nvPosMonde = (modelMatrix * vec4(transformed, 1.0)).xyz;');
+      shader.fragmentShader = shader.fragmentShader
+        .replace('#include <common>', `#include <common>
+varying vec3 vPosObjet;
+varying vec3 vPosMonde;
+uniform vec3 uOr;
+uniform vec3 uNormale;
+uniform vec3 uReflet;
+uniform float uLargeur;
+uniform float uRugositeOr;
+uniform float uBalayage;
+uniform float uEclat;`)
+        // Côté or (derrière le plan de séparation) : couleur or unie, la texture du scan disparaît ; transition courte.
+        .replace('#include <map_fragment>', `#include <map_fragment>
+float partOr = smoothstep(uLargeur, -uLargeur, dot(vPosObjet, uNormale));
+diffuseColor.rgb = mix(diffuseColor.rgb, uOr, partOr);`)
+        .replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nroughnessFactor = mix(roughnessFactor, uRugositeOr, partOr);')
+        .replace('#include <metalnessmap_fragment>', '#include <metalnessmap_fragment>\nmetalnessFactor = mix(metalnessFactor, 1.0, partOr);')
+        // Reflet : une bande oblique de lumière qui traverse l'objet, plus vive sur les faces tournées vers nous.
+        .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+float ecartBande = vPosMonde.x + 0.45 * vPosMonde.y - uBalayage;
+float face = max(dot(normal, normalize(vViewPosition)), 0.0);
+totalEmissiveRadiance += uReflet * uEclat * exp(-ecartBande * ecartBande / 0.008) * (0.3 + 0.7 * face * face);`);
+    };
+    enfant.material = matiere;
   });
-  const cube = new Mesh(geometrie, matiere);
-  scene.add(cube);
+  scene.add(objet);
 
   let progression = 0;
   const dessiner = () => {
-    const e = lisser(progression);
-    matiere.color.lerpColors(pyrite, or, e);
-    matiere.roughness = 0.55 + (0.12 - 0.55) * e;
-    matiere.normalScale.setScalar(1.1 * (1 - e));
-    matiere.clearcoat = 0.6 * e;
-    matiere.envMapIntensity = 0.7 + 0.6 * e;
-    // Légère rotation liée au défilement : un quart de tour sur toute la section.
-    cube.rotation.set(0.5 + 0.08 * progression, -0.75 + progression * (Math.PI / 2), 0);
+    // Demi-tour : pyrite de face au début, or de face à la fin, dans les deux sens.
+    objet.rotation.set(INCLINAISON, progression * Math.PI - ANGLE_SEPARATION, 0);
+    // Le reflet traverse l'objet de gauche à droite entre 38 % et 62 % de la progression (ligne de face à 50 %).
+    const t = (progression - 0.38) / 0.24;
+    reglages.uBalayage.value = -1.7 + 3.4 * t;
+    reglages.uEclat.value = t > 0 && t < 1 ? 1.8 * Math.sin(Math.PI * t) : 0;
     rendu.render(scene, camera);
   };
 
@@ -118,11 +141,13 @@ export function demarrer(conteneur) {
     camera.updateProjectionMatrix();
     dessiner();
   };
+  conteneur.appendChild(toile);
   new ResizeObserver(ajuster).observe(conteneur);
   ajuster();
 
   return {
-    /** @param {number} p progression de 0 (pyrite) à 1 (or) */
+    toile,
+    /** @param {number} p progression de 0 (face pyrite) à 1 (face or) */
     rendre(p) {
       const suivante = Math.min(1, Math.max(0, p));
       if (suivante === progression && toile.width) return;
