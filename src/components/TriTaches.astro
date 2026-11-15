@@ -1,0 +1,47 @@
+---
+// Premier écran : quatre tâches du quotidien qui reçoivent chacune un tampon Or ou Pyrite.
+// L'état final est écrit dans le HTML (lisible tel quel, y compris par les lecteurs d'écran).
+// L'animation est en CSS seul : elle se joue une fois au chargement, jamais si le visiteur demande moins d'animations.
+import Verdict from './Verdict.astro';
+interface Tache { tache: string; verdict: 'or' | 'pyrite' }
+interface Props { titre?: string; taches: Tache[] }
+const { titre = 'Exemples de tri', taches } = Astro.props;
+---
+<ul class="tri" role="list" aria-label={titre} style={`--nombre: ${taches.length}`}>
+  {taches.map((t, i) => (
+    <li class="tri__tache" style={`--i: ${i}`}>
+      <span class="tri__texte">{t.tache}</span>
+      <span class="visuellement-cache"> : </span>
+      <Verdict type={t.verdict} />
+    </li>
+  ))}
+</ul>
+
+<style>
+  .tri { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--espace-8); }
+  .tri__tache {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--espace-16);
+    min-height: 56px; padding: 12px var(--espace-16);
+    background: var(--fond-releve); border: var(--trait-filet) solid var(--filet);
+    font-size: 15px; line-height: 1.4; color: var(--texte);
+  }
+  .tri__texte { min-width: 0; }
+  /* Le tampon garde une légère inclinaison, comme un vrai coup de tampon. */
+  .tri :global(.pyr-verdict) { flex: none; transform: rotate(-2deg); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* 1. Les étiquettes arrivent l'une après l'autre. */
+    .tri__tache { animation: tri-arrivee 600ms cubic-bezier(.16, 1, .3, 1) both; animation-delay: calc(300ms + var(--i) * 350ms); }
+    /* 2. Puis chaque étiquette reçoit son tampon, dans l'ordre. */
+    .tri :global(.pyr-verdict) {
+      animation: tri-tampon 500ms cubic-bezier(.3, 0, .2, 1) both;
+      animation-delay: calc(300ms + var(--nombre, 4) * 350ms + 300ms + var(--i) * 400ms);
+    }
+  }
+  @keyframes tri-arrivee { from { opacity: 0; transform: translateY(12px); } }
+  @keyframes tri-tampon {
+    0% { opacity: 0; transform: scale(1.8) rotate(-10deg); }
+    55% { opacity: 1; transform: scale(.92) rotate(-1deg); }
+    100% { opacity: 1; transform: scale(1) rotate(-2deg); }
+  }
+</style>

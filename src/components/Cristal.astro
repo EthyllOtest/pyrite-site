@@ -1,0 +1,116 @@
+---
+// Cristal de la section « Or ou pyrite » : décoratif, masqué aux lecteurs d'écran.
+// Par défaut (et sur mobile, sans WebGL ou avec « réduire les animations ») : image fixe dessinée ici,
+// un cube de pyrite strié à côté d'un cube d'or lisse. Sur ordinateur, quand la section approche,
+// le cube 3D (src/scripts/cristal-3d.js, Three.js) prend sa place et passe de la pyrite à l'or au défilement.
+// Exception au design system (pas de cristal ni de 3D), décidée par Ewan le 15/11/2026.
+
+// Cube vu en perspective isométrique : sommets à partir du centre (cx, cy) et de l'arête s.
+const cube = (cx: number, cy: number, s = 52) => {
+  const d = Math.round(s * 0.866);
+  const p = (x: number, y: number) => ({ x: cx + x, y: cy + y });
+  return {
+    haut: [p(-d, -s / 2), p(0, -s), p(d, -s / 2), p(0, 0)],
+    gauche: [p(-d, -s / 2), p(0, 0), p(0, s), p(-d, s / 2)],
+    droite: [p(0, 0), p(d, -s / 2), p(d, s / 2), p(0, s)],
+  };
+};
+type Point = { x: number; y: number };
+const points = (face: Point[]) => face.map((q) => `${q.x},${q.y}`).join(' ');
+// Stries : traits parallèles à l'arête a→b, répartis vers l'arête a→c, à intervalles irréguliers.
+const ecarts = [0.09, 0.17, 0.28, 0.34, 0.46, 0.55, 0.63, 0.77, 0.86, 0.93];
+const stries = (a: Point, b: Point, c: Point) => ecarts.map((t) => {
+  const o = { x: a.x + (c.x - a.x) * t, y: a.y + (c.y - a.y) * t };
+  return `M${o.x.toFixed(1)} ${o.y.toFixed(1)}l${(b.x - a.x).toFixed(1)} ${(b.y - a.y).toFixed(1)}`;
+}).join('');
+const P = cube(70, 72);
+const O = cube(210, 72);
+// Deux faces voisines ont des stries perpendiculaires, comme sur un vrai cube de pyrite.
+const striesPyrite = [
+  stries(P.haut[0], P.haut[1], P.haut[3]),
+  stries(P.gauche[0], P.gauche[1], P.gauche[3]),
+  stries(P.droite[0], P.droite[3], P.droite[1]),
+].join('');
+---
+<div class="cristal" data-cristal aria-hidden="true">
+  <svg class="cristal__fixe" viewBox="0 0 280 160" focusable="false">
+    <g class="cristal__pyrite">
+      <polygon class="face-haut" points={points(P.haut)} />
+      <polygon class="face-gauche" points={points(P.gauche)} />
+      <polygon class="face-droite" points={points(P.droite)} />
+      <path class="stries" d={striesPyrite} />
+    </g>
+    <g class="cristal__or">
+      <polygon class="face-haut" points={points(O.haut)} />
+      <polygon class="face-gauche" points={points(O.gauche)} />
+      <polygon class="face-droite" points={points(O.droite)} />
+    </g>
+    <text x="70" y="152" text-anchor="middle">Pyrite</text>
+    <text x="210" y="152" text-anchor="middle">Or</text>
+  </svg>
+</div>
+
+<script>
+  // Charge le cube 3D seulement quand la section approche de l'écran, sur ordinateur, avec les animations permises.
+  const reduit = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const ordinateur = window.matchMedia('(min-width: 768px)');
+
+  document.querySelectorAll<HTMLElement>('[data-cristal]').forEach((boite) => {
+    if (reduit.matches || !ordinateur.matches || !('IntersectionObserver' in window)) return;
+    const section = boite.closest('section') ?? boite;
+
+    const approche = new IntersectionObserver(async (entrees) => {
+      if (!entrees.some((e) => e.isIntersecting)) return;
+      approche.disconnect();
+      try {
+        const { demarrer } = await import('../scripts/cristal-3d.js');
+        const cristal = demarrer(boite);
+        if (!cristal) return; // Pas de WebGL : l'image fixe reste.
+        boite.classList.add('est-3d');
+
+        // Progression : 0 quand le haut de la section entre dans l'écran (pyrite), 1 quand la section
+        // remplit l'écran, le cristal encore entièrement visible (or). Elle suit le défilement dans les deux sens.
+        const progression = () => {
+          const h = window.innerHeight;
+          return (h * 0.85 - section.getBoundingClientRect().top) / (h * 0.85);
+        };
+        let enAttente = false;
+        const dessiner = () => { enAttente = false; cristal.rendre(progression()); };
+        const demander = () => { if (!enAttente) { enAttente = true; requestAnimationFrame(dessiner); } };
+
+        // Pause : on n'écoute le défilement que tant que la section est visible.
+        new IntersectionObserver(([e]) => {
+          if (e.isIntersecting) { window.addEventListener('scroll', demander, { passive: true }); demander(); }
+          else window.removeEventListener('scroll', demander);
+        }).observe(section);
+        window.addEventListener('resize', demander);
+      } catch {
+        // En cas d'échec du chargement, l'image fixe reste affichée.
+      }
+    }, { rootMargin: '600px 0px' });
+    approche.observe(section);
+  });
+</script>
+
+<style>
+  .cristal { position: relative; width: 100%; max-width: 280px; aspect-ratio: 1; display: grid; place-items: center; }
+  .cristal__fixe { width: 100%; height: auto; display: block; overflow: visible; }
+  .cristal :global(.cristal__toile) { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .cristal.est-3d .cristal__fixe { visibility: hidden; }
+  /* Mobile : image fixe seulement, à son format. */
+  @media (max-width: 767px) {
+    .cristal { aspect-ratio: auto; max-width: 320px; }
+    .cristal :global(.cristal__toile) { display: none; }
+    .cristal.est-3d .cristal__fixe { visibility: visible; }
+  }
+
+  /* Couleurs de l'image fixe : uniquement les variables du design system, en aplats. */
+  .cristal__pyrite .face-haut { fill: color-mix(in srgb, var(--ombre) 50%, var(--pyrite)); }
+  .cristal__pyrite .face-gauche { fill: color-mix(in srgb, var(--pyrite) 80%, var(--encre)); }
+  .cristal__pyrite .face-droite { fill: var(--pyrite); }
+  .stries { fill: none; stroke: color-mix(in srgb, var(--encre) 40%, transparent); stroke-width: 1; }
+  .cristal__or .face-haut { fill: var(--reflet); }
+  .cristal__or .face-gauche { fill: var(--laiton); }
+  .cristal__or .face-droite { fill: var(--ombre); }
+  text { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; fill: var(--texte-label); }
+</style>

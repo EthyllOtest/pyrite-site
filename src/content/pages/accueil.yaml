@@ -6,6 +6,17 @@ ouverture:
   titre: Utiliser l'IA là où elle vous aide vraiment.
   texte: "Un accompagnement individuel pour repérer, dans votre travail, les tâches où l'IA vous aide vraiment et celles où elle n'est qu'un faux-semblant. Sur vos tâches réelles, sans jargon."
   mention: 30 minutes · 29 €
+tri:
+  titre: Exemples de tri
+  taches:
+    - tache: Résumer un long compte rendu
+      verdict: or
+    - tache: Rédiger un premier jet d'e-mail
+      verdict: or
+    - tache: Vérifier un chiffre sans source
+      verdict: pyrite
+    - tache: Coller un contrat client dans un chatbot
+      verdict: pyrite
 constat:
   titre: L'IA répond avec le même aplomb, qu'elle ait raison ou non.
   texte: "Les outils d'IA sont faciles à ouvrir et difficiles à bien utiliser. Ce qui manque, ce n'est pas un outil de plus : c'est de savoir où leur faire confiance."

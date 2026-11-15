@@ -43,6 +43,13 @@ export default config({
     accueil: page('Accueil', 'accueil', {
       meta: meta(),
       ouverture: fields.object({ label: texte('Surtitre'), titre: texte('Titre principal'), texte: paragraphe('Texte'), mention: texte('Mention sous le bouton', 'Par exemple : 30 minutes · 29 €') }, { label: 'Premier écran' }),
+      tri: fields.object({
+        titre: texte('Nom de la liste (lu par les lecteurs d’écran, invisible)'),
+        taches: liste('Tâches tamponnées (4 conseillées ; liste masquée si elle est vide)', fields.object({
+          tache: texte('Tâche'),
+          verdict: fields.select({ label: 'Tampon', options: [{ label: 'Or', value: 'or' }, { label: 'Pyrite', value: 'pyrite' }], defaultValue: 'or' }),
+        }, { label: 'Tâche' }), 'tache'),
+      }, { label: 'Premier écran : tri des tâches' }),
       constat: fields.object({ titre: texte('Titre'), texte: paragraphe('Texte'), points: liste('Constats', titreEtTexte('Constat')) }, { label: 'Constat' }),
       methode: fields.object({ label: texte('Surtitre'), titre: texte('Titre'), texte: paragraphe('Texte'), or: titreEtTexte('Verdict Or'), pyrite: titreEtTexte('Verdict Pyrite'), criteres: paragraphe('Phrase sur les critères') }, { label: 'Or ou pyrite' }),
       deroule: fields.object({ titre: texte('Titre'), etapes: liste('Étapes', titreEtTexte('Étape')) }, { label: 'Comment ça se passe' }),

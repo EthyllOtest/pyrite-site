@@ -1,0 +1,141 @@
+/* Animations au défilement (design system, section « Mouvement »).
+   Les états cachés n'existent que si le script a démarré (classe js-anim sur <html>) :
+   sans JavaScript, ou avec « réduire les animations », tout est affiché normalement. */
+
+:root {
+  --courbe-entree: cubic-bezier(.16, 1, .3, 1);
+  --duree-entree: 1000ms;
+  --montee: 40px;
+}
+
+/* Fondu et montée : textes, cartes, lignes de liste */
+.js-anim [data-anim="monte"] {
+  opacity: 0;
+  transform: translateY(var(--montee));
+  transition:
+    opacity var(--duree-entree) var(--courbe-entree) var(--delai, 0ms),
+    transform var(--duree-entree) var(--courbe-entree) var(--delai, 0ms),
+    background-color 150ms ease,
+    text-decoration-thickness 150ms ease;
+}
+.js-anim [data-anim="monte"].est-visible { opacity: 1; transform: none; }
+
+/* Grands titres : chaque mot monte derrière un cache */
+/* Le cache déborde un peu de chaque côté pour ne rogner ni les accents (À, É) ni le crochet du « f ». */
+.mot { display: inline-block; overflow: hidden; vertical-align: top; padding: .12em .12em .16em; margin: -.12em -.12em -.16em; }
+.mot__in { display: inline-block; }
+.js-anim [data-anim="mots"] .mot__in {
+  transform: translateY(130%);
+  transition: transform 1100ms var(--courbe-entree) calc(var(--delai, 0ms) + var(--i, 0) * 70ms);
+}
+.js-anim [data-anim="mots"].est-visible .mot__in { transform: none; }
+
+/* Diviseur à facettes : il se trace de gauche à droite, d'abord clair (reflet), puis il prend sa couleur laiton */
+.js-anim [data-anim="trace"] {
+  clip-path: inset(-4px 100% -4px 0);
+  transition: clip-path 1400ms var(--courbe-entree) calc(var(--delai, 0ms) + 200ms);
+}
+.js-anim [data-anim="trace"].est-visible { clip-path: inset(-4px 0 -4px 0); }
+.js-anim [data-anim="trace"]:not(.pyr-diviseur-reflet):not(.pyr-diviseur-noir) path {
+  transition: stroke 1200ms ease calc(var(--delai, 0ms) + 1100ms);
+}
+.js-anim [data-anim="trace"]:not(.est-visible):not(.pyr-diviseur-reflet):not(.pyr-diviseur-noir) path { stroke: var(--reflet); }
+
+/* Fiche spécimen : l'étiquette se déroule, chaque ligne s'inscrit, la valeur comme à la machine à écrire */
+.js-anim [data-anim="fiche"] {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 900ms var(--courbe-entree) var(--delai, 0ms);
+}
+.js-anim [data-anim="fiche"].est-visible { clip-path: inset(0 0 0 0); }
+.js-anim [data-anim="fiche"] dt {
+  opacity: 0;
+  transform: translateX(-12px);
+  transition:
+    opacity 500ms ease calc(var(--delai, 0ms) + 500ms + var(--i, 0) * 160ms),
+    transform 700ms var(--courbe-entree) calc(var(--delai, 0ms) + 500ms + var(--i, 0) * 160ms);
+}
+.js-anim [data-anim="fiche"] dd {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path calc(var(--n, 8) * 45ms) steps(var(--n, 8), end) calc(var(--delai, 0ms) + 700ms + var(--i, 0) * 160ms);
+}
+.js-anim [data-anim="fiche"].est-visible dt { opacity: 1; transform: none; }
+.js-anim [data-anim="fiche"].est-visible dd { clip-path: inset(0 0 0 0); }
+
+/* Numéros d'étape : compteur mécanique */
+.compteur { display: inline-block; height: 1.1em; overflow: hidden; vertical-align: top; }
+.compteur__colonne {
+  display: block;
+  transition: transform 1800ms var(--courbe-entree) calc(var(--delai, 0ms) + 250ms + var(--j, 0) * 160ms);
+}
+.compteur__colonne > span { display: block; height: 1.1em; line-height: 1.1; }
+.js-anim .est-visible .compteur__colonne { transform: translateY(calc(var(--cible, 0) * -1.1em)); }
+
+/* Or : l'étiquette se dore. Pyrite : elle brille d'abord comme l'or, puis se ternit. */
+.js-anim [data-anim] .pyr-verdict-or {
+  background-image: linear-gradient(var(--or), var(--or));
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  background-color: transparent;
+  color: var(--texte);
+  transition:
+    background-size 900ms var(--courbe-entree) calc(var(--delai, 0ms) + 500ms),
+    color 300ms ease calc(var(--delai, 0ms) + 750ms);
+}
+.js-anim .est-visible .pyr-verdict-or { background-size: 100% 100%; color: var(--sur-accent); }
+.js-anim .carte-verdict--pyrite[data-anim],
+.js-anim [data-anim] .pyr-verdict-pyrite {
+  transition:
+    border-color 1400ms ease calc(var(--delai, 0ms) + 900ms),
+    color 1400ms ease calc(var(--delai, 0ms) + 900ms),
+    opacity var(--duree-entree) var(--courbe-entree) var(--delai, 0ms),
+    transform var(--duree-entree) var(--courbe-entree) var(--delai, 0ms);
+}
+.js-anim .carte-verdict--pyrite[data-anim]:not(.est-visible) { border-color: var(--or); }
+.js-anim [data-anim]:not(.est-visible) .pyr-verdict-pyrite { border-color: var(--or); color: var(--or); }
+
+/* Portrait : il se dévoile de bas en haut, puis le filet laiton apparaît */
+.js-anim [data-anim="portrait"] {
+  clip-path: inset(100% 0 0 0 round var(--rayon-portrait, 24px));
+  outline-color: transparent;
+  transition:
+    clip-path 1400ms var(--courbe-entree) var(--delai, 0ms),
+    outline-color 800ms ease calc(var(--delai, 0ms) + 1100ms);
+}
+.js-anim [data-anim="portrait"].est-visible {
+  clip-path: inset(-16px round calc(var(--rayon-portrait, 24px) + 16px));
+  outline-color: var(--accent);
+}
+
+/* Carte Ultra : un reflet laiton la traverse une seule fois */
+.js-anim .pyr-forfait-sombre[data-anim] { position: relative; overflow: hidden; }
+.js-anim .pyr-forfait-sombre[data-anim]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, color-mix(in srgb, var(--reflet) 24%, transparent) 50%, transparent 65%);
+  transform: translateX(-100%);
+}
+.js-anim .pyr-forfait-sombre.est-visible::after {
+  transform: translateX(100%);
+  transition: transform 1800ms var(--courbe-entree) calc(var(--delai, 0ms) + 600ms);
+}
+
+/* Progression de lecture : fine ligne laiton sous l'en-tête */
+.progression-lecture {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 2px;
+  background: var(--laiton);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--progression, 0));
+  pointer-events: none;
+}
+
+/* À l'impression, tout est visible */
+@media print {
+  .js-anim [data-anim], .js-anim [data-anim] * { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  .progression-lecture { display: none; }
+}
