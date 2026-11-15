@@ -5,6 +5,3 @@ dist/
 .env
 .dev.vars
 .DS_Store
-
-# Fichiers source du modèle 3D (lourds) : jamais commités ni mis en ligne
-modele-source/
