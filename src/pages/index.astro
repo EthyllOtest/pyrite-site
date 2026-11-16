@@ -11,7 +11,6 @@ import Verdict from '../components/Verdict.astro';
 import GrilleForfaits from '../components/GrilleForfaits.astro';
 import AFournir from '../components/AFournir.astro';
 import TriTaches from '../components/TriTaches.astro';
-import Cristal from '../components/Cristal.astro';
 import { rempli } from '../lib/texte';
 
 const a = (await getEntry('pages', 'accueil'))!.data;
@@ -69,13 +68,10 @@ const taches = (a.tri?.taches ?? []).filter((t: { tache?: string; verdict?: stri
 
   <Section titreId="titre-methode">
     <div class="pile pile-48">
-      <div class="methode-tete">
-        <div class="pile pile-16">
-          <p class="pyr-label">{a.methode.label}</p>
-          <h2 id="titre-methode" class="t-titre-2 mesure-titre">{a.methode.titre}</h2>
-          <p class="mesure">{a.methode.texte}</p>
-        </div>
-        <Cristal />
+      <div class="pile pile-16">
+        <p class="pyr-label">{a.methode.label}</p>
+        <h2 id="titre-methode" class="t-titre-2 mesure-titre">{a.methode.titre}</h2>
+        <p class="mesure">{a.methode.texte}</p>
       </div>
       <div class="grille grille-2">
         <div class="carte-verdict carte-verdict--or">
@@ -176,10 +172,4 @@ const taches = (a.tri?.taches ?? []).filter((t: { tache?: string; verdict?: stri
   @media (max-width: 1023px) {
     .ouverture__cote > :global(.tri) { order: -1; }
   }
-
-  /* « Or ou pyrite » : le texte à gauche, le cristal dans sa propre case à droite (jamais par-dessus le texte).
-     Sous 1024 px, le cristal passe sous le texte. */
-  .methode-tete { display: grid; gap: var(--espace-32); grid-template-columns: minmax(0, 1fr); align-items: center; }
-  @media (min-width: 1024px) { .methode-tete { grid-template-columns: minmax(0, 1fr) 280px; gap: var(--espace-64); } }
-  @media (max-width: 767px) { .methode-tete { gap: var(--espace-24); } }
 </style>

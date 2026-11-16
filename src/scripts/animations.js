@@ -13,8 +13,8 @@
     var marque = function (el, type) { el.setAttribute('data-anim', type); };
     var dejaPris = function (el) { return !!(el.parentElement && el.parentElement.closest('[data-anim]')); };
     // Le texte des pages légales reste immobile : il se lit, il ne se montre pas.
-    // Le tri des tâches du premier écran et le cristal ont leur propre animation.
-    var horsChamp = function (el) { return !!el.closest('.legal, .tri, .cristal'); };
+    // Le tri des tâches du premier écran a sa propre animation.
+    var horsChamp = function (el) { return !!el.closest('.legal, .tri'); };
 
     // 1. Blocs entiers : la fiche, le portrait, les cartes et les lignes de liste.
     main.querySelectorAll('.pyr-specimen').forEach(function (el) { marque(el, 'fiche'); });

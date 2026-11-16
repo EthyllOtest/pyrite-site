@@ -21,7 +21,6 @@
     "@keystatic/core": "0.6.9",
     "astro": "7.4.10",
     "react": "19.3.1",
-    "react-dom": "19.3.1",
-    "three": "0.187.0"
+    "react-dom": "19.3.1"
   }
 }
