@@ -22,21 +22,33 @@ const p = (await getEntry('pages', 'parametres'))?.data ?? {};
         </ul>
       </div>
       <div class="pile pile-8">
-        <h2 class="pyr-label">Contact</h2>
-        {rempli(p.email) || rempli(p.linkedin)
-          ? <ul class="pied__liste">
-              {rempli(p.email) && <li><a href={`mailto:${p.email}`}>{p.email}</a></li>}
-              {rempli(p.linkedin) && <li><a href={p.linkedin}>LinkedIn</a></li>}
-            </ul>
-          : <AFournir bloc>e-mail et lien LinkedIn</AFournir>}
-      </div>
-      <div class="pile pile-8">
         <h2 class="pyr-label">Informations légales</h2>
         <ul class="pied__liste">
           <li><a href="/mentions-legales">Mentions légales</a></li>
           <li><a href="/confidentialite">Politique de confidentialité</a></li>
           <li><a href="/cgv">Conditions générales de vente</a></li>
         </ul>
+      </div>
+      <div class="pile pile-8">
+        <h2 class="pyr-label">Contact</h2>
+        {rempli(p.email) || rempli(p.linkedin)
+          ? <ul class="pied__liste pied__liste--icones">
+              {rempli(p.email) && (
+                <li><a href={`mailto:${p.email}`}>
+                  <!-- Enveloppe au trait fin, angles francs (design system, Iconographie) -->
+                  <svg class="pied__icone" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="1.5" y="3.5" width="13" height="9" /><polyline points="1.5,3.5 8,9 14.5,3.5" /></svg>
+                  Mail
+                </a></li>
+              )}
+              {rempli(p.linkedin) && (
+                <li><a href={p.linkedin}>
+                  <!-- « in » dans un carré, au trait fin -->
+                  <svg class="pied__icone" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="1.5" y="1.5" width="13" height="13" /><path d="M5 7v5M5 4.6v.4M8 12V7M8 8.5h3.5V12" /></svg>
+                  LinkedIn
+                </a></li>
+              )}
+            </ul>
+          : <AFournir bloc>e-mail et lien LinkedIn</AFournir>}
       </div>
     </div>
     <div class="pied__bas t-annexe">
